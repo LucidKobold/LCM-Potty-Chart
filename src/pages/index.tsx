@@ -14,6 +14,7 @@ import Calender from "../components/calender";
 import Tutorial from "../components/tutorial";
 import LoadingOverlay from "../components/loading/LoadingOverlay";
 import versionStringToNumber from "../../lib/versionStringToNumber";
+import LoginButton from "../components/buttons/Login";
 
 const IndexPage = (): JSX.Element => {
   const currDateStr: string = useAppSelector(
@@ -121,7 +122,10 @@ const IndexPage = (): JSX.Element => {
             <Calender date={currDate.current} isLoading={isLoading} />
           </Fragment>
         ) : completedTutorial ? (
-          <Calender date={currDate.current} isLoading={isLoading} />
+          <Box>
+            <LoginButton />
+            <Calender date={currDate.current} isLoading={isLoading} />
+          </Box>
         ) : (
           <Tutorial isLoading={isLoading} />
         )}
