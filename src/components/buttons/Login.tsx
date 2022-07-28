@@ -4,17 +4,15 @@ import { Button } from "@chakra-ui/react";
 
 const LoginButton = (): JSX.Element => {
   const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <Button variant="prmary" onClick={() => signOut()}>
-          Sign out
-        </Button>
-      </>
-    );
-  }
-  return (
+
+  return session ? (
+    <>
+      Signed in as {session.user.email} <br />
+      <Button variant="primary" onClick={() => signOut()}>
+        Sign out
+      </Button>
+    </>
+  ) : (
     <>
       Not signed in <br />
       <Button variant="danger" onClick={() => signIn()}>
