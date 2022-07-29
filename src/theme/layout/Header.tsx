@@ -17,37 +17,6 @@ const Header = (): JSX.Element => {
   const appName = "LCM Potty Chart";
   const appVersion = process.env.NEXT_PUBLIC_APP_VERSION_HEADER || "";
 
-  // Add transparency while not at the top of the page.
-  const [transparentNavbar, setTransparentNavbar] = useState<boolean>(false);
-  const lastScroll = useRef<number>(0);
-
-  const handleScroll = (): void => {
-    // Sticky Nav
-    if (window.scrollY >= 20) {
-      setTransparentNavbar(true);
-    } else {
-      setTransparentNavbar(false);
-    }
-
-    // Scroll Position.
-    const currentScroll =
-      window.scrollY || window.pageYOffset || document.body.scrollTop;
-
-    // Update Scroll Position Reference
-    lastScroll.current = currentScroll <= 0 ? 0 : currentScroll;
-    // setScroll(lastScroll.current = currentScroll <= 0 ? 0 : currentScroll)
-  };
-
-  useEffect(() => {
-    if (!window) {
-      console.log("waiting for mount");
-    } else if (window) {
-      window.addEventListener("scroll", handleScroll);
-    }
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Mobile Menu Icon && Open/Close
   const [open, setOpen] = useState<boolean>(false);
   const [hover, setHover] = useState<boolean>(false);
@@ -83,9 +52,7 @@ const Header = (): JSX.Element => {
       bg={
         open
           ? "brand.main"
-          : transparentNavbar
-          ? "rgba(49, 56, 220, 0.9)"
-          : "brand.main"
+          : "rgba(49, 56, 220, 0.9)"
       }
       transition=".5s ease"
       borderRadius="0px 0px 10px 10px"
@@ -171,8 +138,8 @@ const Header = (): JSX.Element => {
               base: "inline-flex",
               lg: "none"
             }}
-            bg={transparentNavbar ? "transparent" : "rgba(255, 255, 255, .15)"}
-            border={transparentNavbar ? "1px solid #0068ff" : "none"}
+            bg="rgba(255, 255, 255, .15)"
+            border="1px solid #0068ff"
             variant="mobileNav"
             type="button"
             onClick={() => setOpen(!open)}

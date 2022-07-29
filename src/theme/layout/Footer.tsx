@@ -6,7 +6,6 @@ import Buttons from "../../components/buttons";
 const Footer = (): JSX.Element => {
   return (
     <Box bg="brand.footer" as="footer" w="100%" h="auto">
-      {/* <BackToTopButton show={showBackToTop} /> */}
       <VStack
         h="auto"
         w="auto"

@@ -10,7 +10,6 @@ const DesktopNav = (): JSX.Element => {
       h="auto"
       w="auto"
       spacing={4}
-      // m="auto"
       justifyContent="center"
       alignContent="center"
       alignItems="center"
