@@ -21,6 +21,8 @@ const generateSticker = (): -2 | -1 | 0 | 1 | 2 => {
     sticker === 2
   ) {
     return sticker;
+  } else {
+    return 0;
   }
 };
 
@@ -58,6 +60,8 @@ const stickersSeeder = (): StickerDays => {
 
   if (stickers.length === daysOfThisMonth) {
     return stickers;
+  } else {
+    return [] as Sticker[];
   }
 };
 
