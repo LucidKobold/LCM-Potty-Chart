@@ -1,13 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
+datasource db {
+  url = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Account {
@@ -24,7 +25,7 @@ model Account {
   id_token          String?  @db.Text
   session_state     String?
   createdAt         DateTime @default(now())
-  updatedAt         DateTime
+  updatedAt         DateTime?
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -36,7 +37,7 @@ model Session {
   userId       String
   expires      DateTime
   createdAt    DateTime @default(now())
-  updatedAt    DateTime
+  updatedAt    DateTime?
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -48,7 +49,7 @@ model User {
   emailVerified DateTime?
   image         String?
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime
+  updatedAt     DateTime?
   accounts      Account[]
   sessions      Session[]
 }
@@ -58,7 +59,7 @@ model VerificationToken {
   token      String   @unique
   expires    DateTime
   createdAt  DateTime @default(now())
-  updatedAt  DateTime
+  updatedAt  DateTime?
 
   @@unique([identifier, token])
 }
