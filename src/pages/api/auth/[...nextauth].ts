@@ -7,6 +7,11 @@ import EmailProvider from "next-auth/providers/email";
 
 const prisma = new PrismaClient();
 
+  // Environment
+  const environment = process.env.NODE_ENV || "development";
+
+  const port: 465 | 587  = environment  === "production" ? 465 : 587
+
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
@@ -23,7 +28,7 @@ export default NextAuth({
     EmailProvider({
       server: {
         host: process.env.SMTP_SERVER_HOST,
-        port: process.env.SMTP_SERVER_PORT,
+        port: port,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
           pass: process.env.EMAIL_SERVER_PASSWORD
