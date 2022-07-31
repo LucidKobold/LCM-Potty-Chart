@@ -7,10 +7,10 @@ import EmailProvider from "next-auth/providers/email";
 
 const prisma = new PrismaClient();
 
-  // Environment
-  const environment = process.env.NODE_ENV || "development";
+// Environment
+const environment = process.env.NODE_ENV || "development";
 
-  const port: 465 | 587  = environment  === "production" ? 465 : 587
+const port: 465 | 587 = environment === "production" ? 465 : 587;
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
