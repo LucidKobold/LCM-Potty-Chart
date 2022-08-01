@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient} from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
@@ -39,8 +39,8 @@ export default NextAuth({
   ],
   session: {
     strategy: "database",
-    maxAge: 30,
-    updateAge: 12
+    maxAge: 2592000,
+    updateAge: 7200
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET
@@ -53,20 +53,21 @@ export default NextAuth({
   //   verifyRequest: "/auth/verify-request", // (used for check email message)
   //   newUser: "/auth/new-user" // New users will be directed here on first sign in (leave the property out if not of interest)
   // },
-  // callbacks: {
-  //   async signIn({ user, account, profile, email, credentials }) {
-  //     return true
-  //   },
-  //   async redirect({ url, baseUrl }) {
-  //     return baseUrl
-  //   },
-  //   async session({ session, token, user }) {
-  //     return session
-  //   },
-  //   async jwt({ token, user, account, profile, isNewUser }) {
-  //     return token
-  //   }
-  // },
+  callbacks: {
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   return true
+    // },
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl
+    // },
+    async session({ session, /*token,*/ user }) {
+      session.user.role = user.role;
+      return session;
+    }
+    // async jwt({ token, user, account, profile, isNewUser }) {
+    //   return token
+    // }
+  },
   // events: {
   //   async signIn(message) { /* on successful sign in */ },
   //   async signOut(message) { /* on signout */ },
