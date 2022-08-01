@@ -16,6 +16,7 @@
     "pretty": "prettier --write .",
     "db-sync": "npx prisma db push",
     "db-migrate": "npx prisma migrate dev",
+    "db-reset": "npx prisma migrate reset",
     "gen": "prisma generate",
     "up": "ncu -u && npm up && npm install"
   },
