@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { PrismaClient} from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
@@ -46,13 +46,13 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_SECRET
   },
   secret: process.env.NEXTAUTH_SECRET,
-  // pages: {
-  //   signIn: "/auth/signin",
-  //   signOut: "/auth/signout",
-  //   error: "/auth/error", // Error code passed in query string as ?error=
-  //   verifyRequest: "/auth/verify-request", // (used for check email message)
-  //   newUser: "/auth/new-user" // New users will be directed here on first sign in (leave the property out if not of interest)
-  // },
+  pages: {
+    signIn: "/auth/signin",
+    signOut: "/auth/signout",
+    error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/auth/verify-request", // (used for check email message)
+    newUser: "/auth/new-user" // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
   callbacks: {
     // async signIn({ user, account, profile, email, credentials }) {
     //   return true
@@ -87,5 +87,5 @@ export default NextAuth({
   //     log.debug(code, metadata)
   //   }
   // },
-  debug: false
+  debug: true
 });

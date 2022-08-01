@@ -74,44 +74,6 @@ const buttonStyles = {
         )(props)
       }
     }),
-    stickyNav: (/* props: Dict<never> | StyleFunctionProps */) => ({
-      bg: "transparent",
-      fontSize: "md",
-      px: 2,
-      _hover: {
-        textDecoration: "underline"
-      }
-    }),
-    footer: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "brand.main",
-      fontSize: "lg",
-      py: 3,
-      px: 4,
-      color: "whiteAlpha",
-      _hover: {
-        bg: mode(whiten("brand.main", 20), darken("brand.main", 20))(props)
-      }
-    }),
-    backToTop: (props: Dict<never> | StyleFunctionProps) => ({
-      bg: "rgba(23, 25, 35, 0.5)",
-      fontSize: "lg",
-      py: 2,
-      px: 4,
-      color: "rgba(0, 134, 255, 0.6)",
-      boxShadow:
-        "rgba(0, 134, 255, 0.05) 0px 0px 15px, rgba(0, 134, 255, 0.1) 0px 0px 3px 1px",
-      border: "1px solid rgba(0, 134, 255, 0.15)",
-      _hover: {
-        bg: mode(
-          whiten("brand.secondary", 20),
-          darken("brand.secondary", 20)
-        )(props),
-        boxShadow:
-          "rgba(0, 104, 255, 0.5) 0px 0px 15px, rgba(0, 104, 255, 0.3) 0px 0px 3px 1px",
-        color: "whiteAlpha.900",
-        border: "1px solid rgba(0, 134, 255, 1)"
-      }
-    }),
     submit: (props: Dict<never> | StyleFunctionProps) => ({
       fontSize: "lg",
       py: 2,
@@ -175,6 +137,18 @@ const buttonStyles = {
           whiten("brand.twitter", 20),
           darken("brand.twitter", 20)
         )(props)
+      }
+    }),
+    signIn: (/*props: Dict<never> | StyleFunctionProps*/) => ({
+      bg: "transparent",
+      fontSize: "lg",
+      py: 3,
+      px: 4,
+      color: "whiteAlpha",
+      border: "1px solid #0068ff",
+      _hover: {
+        boxShadow:
+          "rgba(0, 134, 255, 0.5) 0px 0px 15px, rgba(0, 134, 255, 0.3) 0px 0px 3px 1px"
       }
     })
   },
