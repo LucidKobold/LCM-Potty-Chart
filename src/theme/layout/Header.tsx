@@ -178,7 +178,7 @@ const Header = (): JSX.Element => {
             <PopoverTrigger>
               <Button
                 rounded="full"
-                variant="mobileNav"
+                variant="nav"
                 cursor="pointer"
                 p={0}
                 m={0}
