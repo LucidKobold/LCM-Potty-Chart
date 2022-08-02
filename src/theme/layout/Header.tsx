@@ -24,6 +24,7 @@ import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 import appLogo from "../../../public/images/logo.svg";
 import Image from "next/image";
+import SignOutButton from "../../components/auth/buttons/SingnOutButton";
 
 const Header = (): JSX.Element => {
   const router = useRouter();
@@ -192,12 +193,12 @@ const Header = (): JSX.Element => {
                       src={session.user.image}
                     />
                   ) : (
-                    <Text fontSize="1.5rem">
+                    <Text fontSize="2rem">
                       <Icon icon="carbon:user-avatar-filled-alt" />
                     </Text>
                   )
                 ) : (
-                  <Text fontSize="1.5rem">
+                  <Text fontSize="2rem">
                     <Icon icon="carbon:user-avatar-filled-alt" />
                   </Text>
                 )}
@@ -211,6 +212,7 @@ const Header = (): JSX.Element => {
                 {
                   "Actions a user can take. Such as viewing their friends list, accessing their settings, going to their profile, and signing out."
                 }
+                <SignOutButton />
               </PopoverBody>
             </PopoverContent>
           </Popover>

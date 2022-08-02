@@ -1,7 +1,7 @@
 import React from "react";
+import { signIn } from "next-auth/react";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
-import { signIn } from "next-auth/react";
 
 interface SignInButtonProps {
   provider: string;
