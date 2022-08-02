@@ -65,7 +65,7 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
     <VStack
       h="100%"
       w="100%"
-      my="20vh"
+      my="24vh"
       justifyContent="center"
       alignContent="center"
     >
