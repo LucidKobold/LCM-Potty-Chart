@@ -61,22 +61,13 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
             textAlign="center"
             spacing={0}
           >
-            <Heading
-              as="h1"
-              fontSize={{ base: "3xl", md: "5xl" }}
-            >
+            <Heading as="h1" fontSize={{ base: "3xl", md: "5xl" }}>
               {"Lucid Creations Media"}
             </Heading>
-            <Heading
-              as="h2"
-              fontSize={{ base: "2xl", md: "4xl" }}
-            >
+            <Heading as="h2" fontSize={{ base: "2xl", md: "4xl" }}>
               {"Code Name:"}
             </Heading>
-            <Heading
-              as="h3"
-              fontSize={{ base: "2xl", md: "4xl" }}
-            >
+            <Heading as="h3" fontSize={{ base: "2xl", md: "4xl" }}>
               {"Potty Chart"}
             </Heading>
           </VStack>

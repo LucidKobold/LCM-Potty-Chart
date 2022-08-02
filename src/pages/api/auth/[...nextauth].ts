@@ -87,5 +87,5 @@ export default NextAuth({
   //     log.debug(code, metadata)
   //   }
   // },
-  debug: true
+  debug: false
 });

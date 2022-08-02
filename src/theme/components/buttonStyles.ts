@@ -97,6 +97,8 @@ const buttonStyles = {
       // bg: "transparent",
       fontSize: "md",
       px: 2,
+      bg: "rgba(255, 255, 255, .15)",
+      border: "1px solid #0068ff",
       boxShadow:
         "rgba(0, 134, 255, 0.30) 0px 0px 15px, rgba(0, 134, 255, 0.15) 0px 0px 3px 1px",
       _hover: {

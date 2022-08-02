@@ -1,19 +1,34 @@
 import React, { useState } from "react";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import {
   Heading,
   HStack,
   Box,
   IconButton,
   Menu,
-  MenuButton
+  MenuButton,
+  Avatar,
+  Button,
+  Popover,
+  PopoverTrigger,
+  SkeletonCircle,
+  Text,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 import appLogo from "../../../public/images/logo.svg";
+import Image from "next/image";
 
 const Header = (): JSX.Element => {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const appName = "LCM Potty Chart";
   const appVersion = process.env.NEXT_PUBLIC_APP_VERSION_HEADER || "";
 
@@ -36,6 +51,9 @@ const Header = (): JSX.Element => {
       return iconType.default;
     }
   };
+
+  // User session and profile
+  const { data: session, status } = useSession();
 
   return (
     <Box
@@ -79,7 +97,6 @@ const Header = (): JSX.Element => {
         }}
       >
         <Image height="30px" width="30px" src={appLogo} alt="App Logo" />
-
         <Heading as="h1" size="md">
           {appName}
         </Heading>
@@ -134,8 +151,6 @@ const Header = (): JSX.Element => {
               base: "inline-flex",
               lg: "none"
             }}
-            bg="rgba(255, 255, 255, .15)"
-            border="1px solid #0068ff"
             variant="mobileNav"
             type="button"
             onClick={() => setOpen(!open)}
@@ -144,6 +159,62 @@ const Header = (): JSX.Element => {
           />
           <MobileNav updateOpen={setOpen} />
         </Menu>
+        <Box alignItems="center">
+          <Popover
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            onOpen={() => {
+              if (!session) {
+                router.push("/auth/signin");
+                setIsOpen(false);
+              }
+
+              if (session) {
+                setIsOpen(true);
+              }
+            }}
+          >
+            <PopoverTrigger>
+              <Button
+                rounded="full"
+                variant="mobileNav"
+                cursor="pointer"
+                p={0}
+                m={0}
+              >
+                {session ? (
+                  status === "loading" ? (
+                    <SkeletonCircle size="1.5rem" />
+                  ) : session.user.image ? (
+                    <Avatar
+                      name={session.user.name}
+                      size="sm"
+                      src={session.user.image}
+                    />
+                  ) : (
+                    <Text fontSize="1.5rem">
+                      <Icon icon="carbon:user-avatar-filled-alt" />
+                    </Text>
+                  )
+                ) : (
+                  <Text fontSize="1.5rem">
+                    <Icon icon="carbon:user-avatar-filled-alt" />
+                  </Text>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent mt={2} mr={4} textAlign="center">
+              {/* <PopoverArrow /> */}
+              <PopoverCloseButton />
+              <PopoverHeader>{"User Actions"}</PopoverHeader>
+              <PopoverBody>
+                {
+                  "Actions a user can take. Such as viewing their friends list, accessing their settings, going to their profile, and signing out."
+                }
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+        </Box>
       </HStack>
     </Box>
   );
