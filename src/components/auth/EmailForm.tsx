@@ -90,7 +90,7 @@ const EmailForm = ({ provider, id, signIn }: EmailFormProps): JSX.Element => {
             height: "100%"
           }}
         >
-          <VStack h="auto" w="100%" spacing={4}>
+          <VStack h="auto" w="100%" spacing={6}>
             <Field name="email" validate={validateEmail}>
               {({ field, form }: FieldProps) => (
                 <FormControl

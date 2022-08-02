@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Divider, Heading, Image, VStack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { Box, Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import {
   getProviders,
   signIn,
@@ -19,6 +20,47 @@ interface SignInPageProps {
 }
 
 const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
+  const router = useRouter()
+  const { error } = router.query;
+
+  // const errorType: { [key: string]: string } = {
+  //   "OAuthSignin": "Try signing in with a different account.",
+  //   "OAuthCallback": "Try signing in with a different account.",
+  //   "OAuthCreateAccount": "Try signing in with a different account.",
+  //   "EmailCreateAccount": "Try signing in with a different account.",
+  //   "Callback": "Try signing in with a different account.",
+  //   "OAuthAccountNotLinked": "To confirm your identity, sign in with the same account you used originally.",
+  //   "EmailSignin": "The e-mail could not be sent.",
+  //   "CredentialsSignin": "Sign in failed. Check the details you provided are correct.",
+  //   "SessionRequired": "Please sign in to access this page.",
+  //   "Default": "Unable to sign in."
+  // }
+
+  const errorType = (error: string): string => {
+    switch (error) {
+      case "OAuthSignin":
+        return "Try signing in with a different account.";
+      case "OAuthCallback":
+        return "Try signing in with a different account.";
+      case "OAuthCreateAccount":
+        return "Try signing in with a different account.";
+      case "EmailCreateAccount":
+        return "Try signing in with a different account.";
+      case "Callback":
+        return "Try signing in with a different account.";
+      case "OAuthAccountNotLinked":
+        return "To confirm your identity, sign in with the same account you used originally.";
+      case "EmailSignin":
+        return "The e-mail could not be sent.";
+      case "CredentialsSignin":
+        return "Sign in failed. Check the details you provided are correct.";
+      case "SessionRequired":
+        return "Please sign in to access this page."
+      default:
+        return "Unable to sign in."
+    }
+  }
+
   return (
     <VStack
       h="100%"
@@ -37,12 +79,11 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
         border="1px solid #0068ff"
         borderRadius="2xl"
         boxShadow="rgba(0, 134, 255, 0.5) 0px 0px 15px, rgba(0, 134, 255, 0.3) 0px 0px 3px 1px"
-        spacing={4}
+        spacing={6}
       >
         <VStack
           h="100%"
           w="100%"
-          mb="3vh"
           justifyContent="center"
           alignContent="center"
           spacing={6}
@@ -71,8 +112,23 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
               {"Potty Chart"}
             </Heading>
           </VStack>
-          <Divider />
         </VStack>
+        {error &&
+          <Box
+            bg="brand.danger"
+            color="black"
+            borderRadius="lg"
+            py={2}
+            px={8}
+            textAlign="center"
+          >
+            <Text
+              fontSize="xl"
+            >
+              {Array.isArray(error) ? errorType(error[0]) : errorType(error)}
+            </Text>
+          </Box>
+        }
         {Object.values(providers).map((provider) => {
           const { id, name } = provider;
           return name !== "Email" ? (
@@ -84,7 +140,6 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
             />
           ) : (
             <Box key={name.replace(" ", "")} h="100%" w="100%">
-              <Divider my={10} />
               <EmailForm id={id} provider={name} signIn={signIn} />
             </Box>
           );
