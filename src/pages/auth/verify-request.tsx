@@ -1,8 +1,6 @@
 import React from "react";
 import { Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
 
-// TODO: "The page normally instructs the user to check their email. Theme it with LCM."
-
 const VerifyPage = (): JSX.Element => {
   return (
     <VStack
