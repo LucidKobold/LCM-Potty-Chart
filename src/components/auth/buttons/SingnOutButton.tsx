@@ -3,7 +3,6 @@ import { signOut } from "next-auth/react";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 
-
 const SignOutButton = (): JSX.Element => {
   return (
     <Button

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Box, Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import {
   getProviders,
   signIn,
@@ -20,7 +20,7 @@ interface SignInPageProps {
 }
 
 const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
-  const router = useRouter()
+  const router = useRouter();
   const { error } = router.query;
 
   // const errorType: { [key: string]: string } = {
@@ -55,11 +55,11 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
       case "CredentialsSignin":
         return "Sign in failed. Check the details you provided are correct.";
       case "SessionRequired":
-        return "Please sign in to access this page."
+        return "Please sign in to access this page.";
       default:
-        return "Unable to sign in."
+        return "Unable to sign in.";
     }
-  }
+  };
 
   return (
     <VStack
@@ -113,7 +113,7 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
             </Heading>
           </VStack>
         </VStack>
-        {error &&
+        {error && (
           <Box
             bg="brand.danger"
             color="black"
@@ -122,13 +122,11 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
             px={8}
             textAlign="center"
           >
-            <Text
-              fontSize="xl"
-            >
+            <Text fontSize="xl">
               {Array.isArray(error) ? errorType(error[0]) : errorType(error)}
             </Text>
           </Box>
-        }
+        )}
         {Object.values(providers).map((provider) => {
           const { id, name } = provider;
           return name !== "Email" ? (
