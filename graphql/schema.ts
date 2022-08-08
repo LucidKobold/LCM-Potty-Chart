@@ -1,25 +1,29 @@
-import { Account, Role, Session } from "@prisma/client";
 import { gql } from "apollo-server-micro";
 
-export const typeDefs = gql;
+const typeDefs = gql`
+  scalar Date
 
-type User = {
-  id: string;
-  name?: string;
-  role: Role;
-  email: string;
-  emailVerified: Date;
-  image: string;
-  createdAt: Date;
-  updatedAt: Date;
-  accounts: Account[];
-  sessions: Session[];
-};
+  enum Role {
+    ADMIN
+    USER
+  }
 
-type Query = {
-  user: [User];
-};
+  type User {
+    id: ID!
+    name: String
+    role: Role!
+    email: String
+    emailVerified: Date
+    image: String
+    createdAt: Date!
+    updatedAt: Date!
+    # accounts: [Account]!
+    # sessions: [Session]!
+  }
 
-type Mutation = {
-  addUser: [User];
-};
+  type Query {
+    users: [User]!
+  }
+`;
+
+export default typeDefs;
