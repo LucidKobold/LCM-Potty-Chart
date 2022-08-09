@@ -1,5 +1,5 @@
 import { objectType } from "nexus";
-import User from "./User";
+// import User from "./User";
 
 const Account = objectType({
   name: "Account",
