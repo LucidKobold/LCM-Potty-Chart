@@ -1,16 +1,17 @@
 import { ApolloServer } from "apollo-server-micro";
-import typeDefs from "../../../../graphql/schema";
+import typeDefs, { DateTime } from "../../../../graphql/schema";
+import schema from "../../../../graphql/schema";
 import resolvers from "../../../../graphql/resolvers";
-import { dateScalar } from "../../../../graphql/scalars";
 import context from "../../../../graphql/context";
 import Cors from "micro-cors";
 
 const cors = Cors();
 
 const apolloServer = new ApolloServer({
-  typeDefs,
+  schema: schema,
+  typeDefs: typeDefs,
   resolvers: {
-    Date: dateScalar,
+    Date: DateTime,
     ...resolvers
   },
   context: context,

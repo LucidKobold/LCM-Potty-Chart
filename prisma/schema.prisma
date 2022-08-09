@@ -41,6 +41,11 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -62,9 +67,4 @@ model VerificationToken {
   updatedAt  DateTime @default(now())
 
   @@unique([identifier, token])
-}
-
-enum Role {
-  ADMIN
-  USER
 }
