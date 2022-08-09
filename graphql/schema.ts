@@ -1,56 +1,69 @@
-import { asNexusMethod, makeSchema } from "nexus";
-import { dateScalar as date } from "./scalars";
-import * as types from "./types";
-import { join } from "path";
+import { gql } from "apollo-server-micro";
+import { GraphQLScalarType } from "graphql";
 
-export const DateTime = asNexusMethod(date, "date");
-
-const schema = makeSchema({
-  types: [DateTime, types],
-  outputs: {
-    typegen: join(
-      process.cwd(),
-      "node_modules",
-      "@types",
-      "nexus-typegen",
-      "index.d.ts"
-    ),
-    schema: join(process.cwd(), "graphql", "schema.graphql")
+const DateTime = new GraphQLScalarType({
+  name: "Date",
+  description: "Date scalar",
+  parseValue(value: string) {
+    return new Date(value);
   },
-  contextType: {
-    export: "Context",
-    module: join(process.cwd(), "graphql", "context.ts")
+  serialize(value: Date) {
+    return value.toJSON();
   }
 });
 
-export default schema;
+const typeDefs = gql`
+  scalar Date
 
-// import { gql } from "apollo-server-micro";
+  enum Role {
+    ADMIN
+    USER
+  }
 
-// const typeDefs = gql`
-//   scalar Date
+  type User {
+    id: ID!
+    name: String
+    role: Role!
+    email: String
+    emailVerified: Date
+    image: String
+    createdAt: Date!
+    updatedAt: Date!
+    accounts: [Account]!
+    sessions: [Session]!
+  }
 
-//   enum Role {
-//     ADMIN
-//     USER
-//   }
+  type Account {
+    id: ID!
+    userId: String!
+    type: String!
+    provider: String!
+    providerAccountId: String!
+    refresh_token: String
+    access_token: String
+    expires_at: Int
+    scope: String
+    id_token: String
+    session_state: String
+    createdAt: Date!
+    updatedAt: Date!
+    user: User!
+  }
 
-//   type User {
-//     id: ID!
-//     name: String
-//     role: Role!
-//     email: String
-//     emailVerified: Date
-//     image: String
-//     createdAt: Date!
-//     updatedAt: Date!
-//     # accounts: [Account]!
-//     # sessions: [Session]!
-//   }
+  type Session {
+    id: ID!
+    sessionToken: String!
+    userId: String!
+    expires: Date!
+    createdAt: Date!
+    updatedAt: Date!
+    user: User!
+  }
 
-//   type Query {
-//     users: [User]!
-//   }
-// `;
+  type Query {
+    users: [User]!
+  }
+`;
 
-// export default typeDefs;
+export default typeDefs;
+export { DateTime };
