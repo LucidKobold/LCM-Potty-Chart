@@ -15,7 +15,6 @@ type Account {
   token_type: String
   type: String
   updatedAt: Date
-  user: User
   userId: String
 }
 
@@ -36,7 +35,6 @@ type Session {
   id: ID
   sessionToken: String
   updatedAt: Date
-  user: User
   userId: String
 }
 
