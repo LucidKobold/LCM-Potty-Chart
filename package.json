@@ -34,6 +34,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^6.5.1",
     "graphql": "^16.5.0",
+    "micro": "^9.4.1",
     "micro-cors": "^0.1.1",
     "mongodb": "^4.8.1",
     "next": "12.2.3",

@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
@@ -12,7 +12,7 @@ const environment = process.env.NODE_ENV || "development";
 
 const port: 465 | 587 = environment === "production" ? 465 : 587;
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
   providers: [
@@ -88,4 +88,6 @@ export default NextAuth({
   //   }
   // },
   debug: false
-});
+};
+
+export default NextAuth(authOptions);
