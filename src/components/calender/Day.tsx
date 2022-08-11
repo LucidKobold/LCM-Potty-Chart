@@ -10,7 +10,8 @@ import {
   getDate,
   isBefore,
   endOfDay,
-  isToday as isTodayFun
+  isToday as isTodayFun,
+  startOfDay
 } from "date-fns";
 import router from "next/router";
 import AddUpdateSticker from "./modals/AddUpdateSticker";
@@ -163,9 +164,14 @@ const Day = ({
       justifyContent="flex-start"
       pt={2}
       _hover={{
-        cursor: isBefore(currDateObj, endOfDay(currDate))
-          ? "pointer"
-          : "default",
+        cursor:
+          tutorial === "add" && isTodayFun(currDateObj)
+            ? "pointer"
+            : tutorial === "edit" && isBefore(currDateObj, startOfDay(currDate))
+            ? "pointer"
+            : !tutorial && isBefore(currDateObj, endOfDay(currDate))
+            ? "pointer"
+            : "default",
         bg: tutorial
           ? tutorial === "add" && isToday
             ? "gray.600"
