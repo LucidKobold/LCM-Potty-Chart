@@ -14,6 +14,35 @@ const DateTime = new GraphQLScalarType({
 
 const typeDefs = gql`
   scalar Date
+  type Account {
+    id: ID!
+    userId: String!
+    type: String!
+    provider: String!
+    providerAccountId: String!
+    refresh_token: String
+    access_token: String
+    expires_at: Int
+    token_type: String
+    scope: String
+    id_token: String
+    session_state: String
+    oauth_token_secret: String
+    oauth_token: String
+    createdAt: Date!
+    updatedAt: Date!
+    user: User!
+  }
+
+  type Session {
+    id: ID!
+    sessionToken: String!
+    userId: String!
+    expires: Date!
+    createdAt: Date!
+    updatedAt: Date!
+    user: User!
+  }
 
   enum Role {
     ADMIN
@@ -33,35 +62,16 @@ const typeDefs = gql`
     sessions: [Session]!
   }
 
-  type Account {
-    id: ID!
-    userId: String!
-    type: String!
-    provider: String!
-    providerAccountId: String!
-    refresh_token: String
-    access_token: String
-    expires_at: Int
-    scope: String
-    id_token: String
-    session_state: String
-    createdAt: Date!
-    updatedAt: Date!
-    user: User!
-  }
-
-  type Session {
-    id: ID!
-    sessionToken: String!
-    userId: String!
-    expires: Date!
-    createdAt: Date!
-    updatedAt: Date!
-    user: User!
-  }
-
   type Query {
     users: [User]!
+  }
+
+  type VerificationToken {
+    identifier: String
+    token: String
+    createdAt: Date!
+    updatedAt: Date!
+    expires: Date!
   }
 `;
 
