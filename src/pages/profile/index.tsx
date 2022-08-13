@@ -1,15 +1,38 @@
 import React from "react";
 import { useSession } from "next-auth/react";
-import { Box } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import LoadingOverlay from "../../components/loading/LoadingOverlay";
+import ProfileHeader from "../../components/profile/Header";
 
 const UserProfile = (): JSX.Element => {
   const { data: session, status } = useSession();
 
   return status === "loading" ? (
-    <LoadingOverlay />
+    <VStack
+      pt="50px"
+      w="100%"
+      h="auto"
+      justifyContent="center"
+      alignContent="center"
+    >
+      <LoadingOverlay />
+      <ProfileHeader loading={true} />
+    </VStack>
   ) : session ? (
-    <Box pt="50px">{`Welcome to your profile ${session.user.email}`}</Box>
+    <VStack
+      pt="50px"
+      w="100%"
+      h="auto"
+      justifyContent="center"
+      alignContent="center"
+    >
+      <ProfileHeader
+        name={session.user.name}
+        email={session.user.email}
+        image={session.user.image}
+        loading={false}
+      />
+    </VStack>
   ) : (
     <Box pt="50px">{"You must be logged in to view your profile."}</Box>
   );
