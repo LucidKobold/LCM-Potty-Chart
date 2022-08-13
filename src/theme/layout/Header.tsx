@@ -17,7 +17,8 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverHeader
+  PopoverHeader,
+  PopoverFooter
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import DesktopNav from "./DesktopNav";
@@ -25,6 +26,7 @@ import MobileNav from "./MobileNav";
 import appLogo from "../../../public/images/logo.svg";
 import Image from "next/image";
 import SignOutButton from "../../components/auth/buttons/SingnOutButton";
+import CustomButton from "../../components/buttons/Custom";
 
 const Header = (): JSX.Element => {
   const router = useRouter();
@@ -203,11 +205,16 @@ const Header = (): JSX.Element => {
               <PopoverCloseButton />
               <PopoverHeader>{"User Actions"}</PopoverHeader>
               <PopoverBody>
-                {
-                  "Actions a user can take. Such as viewing their friends list, accessing their settings, going to their profile, and signing out."
-                }
-                <SignOutButton />
+                <CustomButton
+                  text={"Profile"}
+                  link={"/profile"}
+                  type={"primary"}
+                  newTab={false}
+                />
               </PopoverBody>
+              <PopoverFooter>
+                <SignOutButton />
+              </PopoverFooter>
             </PopoverContent>
           </Popover>
         </Box>

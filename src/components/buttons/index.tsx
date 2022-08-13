@@ -26,6 +26,7 @@ const Buttons = (): JSX.Element => {
                 link={href}
                 text={name}
                 type={type}
+                newTab={true}
               />
             );
           }
@@ -57,6 +58,7 @@ const Buttons = (): JSX.Element => {
                 link={href}
                 text={name}
                 type={type}
+                newTab={true}
               />
             );
           }
