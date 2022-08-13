@@ -2,7 +2,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { Box, VStack } from "@chakra-ui/react";
 import LoadingOverlay from "../../components/loading/LoadingOverlay";
-import ProfileHeader from "../../components/profile/Header";
+import ProfileHeader from "../../components/profile/ProfileHeader";
 
 const UserProfile = (): JSX.Element => {
   const { data: session, status } = useSession();
