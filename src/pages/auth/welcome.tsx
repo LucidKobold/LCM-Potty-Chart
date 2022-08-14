@@ -4,6 +4,7 @@ import { Box } from "@chakra-ui/react";
 import Activation from "../../components/welcome/Activation";
 import { gql, useLazyQuery } from "@apollo/client";
 import { isBefore } from "date-fns";
+import ModifyAccount from "../../components/welcome/ModifyAccount";
 
 // TODO: On this page users will see the tutorial, have a chance to edit their info, customize their privacy settings, and add their friends.
 
@@ -55,7 +56,8 @@ const NewUserPage = (): JSX.Element => {
     userId,
     validatedAt,
     expires
-  }: Token): string => {
+  }: Token): { status: boolean; message: string } => {
+    let flag = false;
     let message =
       "An error ocurred when checking if your account was activated. Please try again.";
     console.info(validated, userId, validatedAt, expires);
@@ -91,16 +93,21 @@ const NewUserPage = (): JSX.Element => {
       isBefore(new Date(validatedAt), new Date(expires))
     ) {
       message = "Your account is activated.";
+      flag = true;
     }
 
-    return message;
+    return { status: flag, message: message };
   };
 
   return session ? (
     <Box pt="50px">
       <Activation userId={session.user.id} />
       {data ? (
-        <Box>{validateToken(data.getVerificationWithUserId)}</Box>
+        validateToken(data.getVerificationWithUserId).status ? (
+          <ModifyAccount />
+        ) : (
+          <Box>{validateToken(data.getVerificationWithUserId).message}</Box>
+        )
       ) : (
         <Box>
           {

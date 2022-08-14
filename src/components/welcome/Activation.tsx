@@ -32,7 +32,7 @@ const Activation = ({ userId }: ActivateProps): JSX.Element => {
   };
 
   return (
-    <Box pt="50px">
+    <Box>
       <Button onClick={() => genVerificationEmail(userId)}>
         {"Activate Account"}
       </Button>

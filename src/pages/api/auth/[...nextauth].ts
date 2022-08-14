@@ -63,6 +63,11 @@ export const authOptions: NextAuthOptions = {
     async session({ session, /*token,*/ user }) {
       session.user.role = user.role;
       session.user.id = user.id;
+      session.user.username =
+        user.username && typeof user.username === "string" ? user.username : "";
+      session.user.bio =
+        user.bio && typeof user.bio === "string" ? user.bio : "";
+
       return session;
     }
     // async jwt({ token, user, account, profile, isNewUser }) {
