@@ -1,9 +1,13 @@
 const publicResolvers = {
   Query: {
     users: async (_parent, _args, ctx) => await ctx.prisma.user.findMany(),
-    getVerification: async (_parent, { activationToken }, ctx) =>
+    getVerificationWithToken: async (_parent, { activationToken }, ctx) =>
       await ctx.prisma.verifyAccount.findUnique({
         where: { token: activationToken }
+      }),
+    getVerificationWithUserId: async (_parent, { userId }, ctx) =>
+      await ctx.prisma.verifyAccount.findUnique({
+        where: { userId: userId }
       })
   },
   Mutation: {

@@ -85,7 +85,8 @@ const typeDefs = gql`
 
   type Query {
     users: [User]!
-    getVerification(activationToken: String!): VerifyAccount!
+    getVerificationWithToken(activationToken: String!): VerifyAccount!
+    getVerificationWithUserId(userId: String!): VerifyAccount!
   }
 
   type Mutation {

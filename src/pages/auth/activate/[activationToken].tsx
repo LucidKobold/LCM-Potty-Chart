@@ -2,24 +2,23 @@ import React from "react";
 import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
 import { Box, Button } from "@chakra-ui/react";
-
-const UPDATE_ACTIVATEACCOUNT = gql`
-  mutation ActivateAccount($activationToken: String!) {
-    activateAccount(activationToken: $activationToken) {
-      id
-      userId
-      token
-      validated
-      validatedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
 const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
   const { activationToken } = router.query;
+
+  const UPDATE_ACTIVATEACCOUNT = gql`
+    mutation ActivateAccount($activationToken: String!) {
+      activateAccount(activationToken: $activationToken) {
+        id
+        userId
+        token
+        validated
+        validatedAt
+        createdAt
+        updatedAt
+      }
+    }
+  `;
 
   const [updatedToken, { data }] = useMutation(UPDATE_ACTIVATEACCOUNT);
 
