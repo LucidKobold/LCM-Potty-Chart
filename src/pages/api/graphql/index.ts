@@ -2,7 +2,7 @@
 // import { authOptions } from "../auth/[...nextauth]";
 import { ApolloServer } from "apollo-server-micro";
 import typeDefs, { DateTime } from "../../../../graphql/schema";
-import resolvers from "../../../../graphql/public/resolvers";
+import resolvers from "../../../../graphql/resolvers";
 import context from "../../../../graphql/context";
 import Cors from "micro-cors";
 

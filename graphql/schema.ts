@@ -58,12 +58,9 @@ const typeDefs = gql`
     image: String
     createdAt: Date!
     updatedAt: Date!
+    verifyAccount: VerifyAccount!
     accounts: [Account]!
     sessions: [Session]!
-  }
-
-  type Query {
-    users: [User]!
   }
 
   type VerificationToken {
@@ -72,6 +69,28 @@ const typeDefs = gql`
     createdAt: Date!
     updatedAt: Date!
     expires: Date!
+  }
+
+  type VerifyAccount {
+    id: String!
+    userId: String!
+    token: String!
+    validated: Boolean!
+    validatedAt: Date
+    createdAt: Date
+    updatedAt: Date!
+    expires: Date!
+    User: User!
+  }
+
+  type Query {
+    users: [User]!
+    getVerification(activationToken: String!): VerifyAccount!
+  }
+
+  type Mutation {
+    genVerificationEmail(userId: String!, expires: Date!): VerifyAccount!
+    activateAccount(activationToken: String!): VerifyAccount!
   }
 `;
 

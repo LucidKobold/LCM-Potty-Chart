@@ -62,20 +62,23 @@ export const authOptions: NextAuthOptions = {
     // },
     async session({ session, /*token,*/ user }) {
       session.user.role = user.role;
+      session.user.id = user.id;
       return session;
     }
     // async jwt({ token, user, account, profile, isNewUser }) {
     //   return token
     // }
   },
-  // events: {
-  //   async signIn(message) { /* on successful sign in */ },
-  //   async signOut(message) { /* on signout */ },
-  //   async createUser(message) { /* user created */ },
-  //   async updateUser(message) { /* user updated - e.g. their email was verified */ },
-  //   async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },
-  //   async session(message) { /* session is active */ },
-  // },
+  events: {
+    // async signIn(message) { /* on successful sign in */ },
+    // async signOut(message) { /* on signout */ },
+    async createUser(message) {
+      // Code here
+    }
+    // async updateUser(message) { /* user updated - e.g. their email was verified */ },
+    // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },
+    // async session(message) { /* session is active */ },
+  },
   // logger: {
   //   error(code, metadata) {
   //     log.error(code, metadata)
