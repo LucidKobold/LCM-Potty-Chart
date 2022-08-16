@@ -27,7 +27,7 @@ model Account {
   oauth_token        String?
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
-  user               User     @relation(fields: [userId], references: [id])
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -48,19 +48,19 @@ enum Role {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  username      String?        @unique
-  bio           String?
-  role          Role           @default(USER)
-  email         String?        @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  accounts      Account[]
-  sessions      Session[]
-  VerifyAccount VerifyAccount?
+  id              String           @id @default(cuid())
+  name            String?
+  username        String?          @unique
+  bio             String?
+  role            Role             @default(USER)
+  email           String?          @unique
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  accounts        Account[]
+  sessions        Session[]
+  ActivationToken ActivationToken?
 }
 
 model VerificationToken {
@@ -73,7 +73,7 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model VerifyAccount {
+model ActivationToken {
   id          String    @id @default(cuid())
   userId      String    @unique
   token       String    @unique @default(cuid())
@@ -82,5 +82,5 @@ model VerifyAccount {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   expires     DateTime
-  user        User      @relation(fields: [userId], references: [id])
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

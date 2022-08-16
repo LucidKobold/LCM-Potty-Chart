@@ -4,6 +4,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import EmailProvider from "next-auth/providers/email";
+import genActivationToken from "../../../../lib/activation/genActivationToken";
 
 const prisma = new PrismaClient();
 
@@ -78,7 +79,7 @@ export const authOptions: NextAuthOptions = {
     // async signIn(message) { /* on successful sign in */ },
     // async signOut(message) { /* on signout */ },
     async createUser(message) {
-      // Code here
+      genActivationToken(message.user.id);
     }
     // async updateUser(message) { /* user updated - e.g. their email was verified */ },
     // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },
