@@ -79,7 +79,8 @@ export const authOptions: NextAuthOptions = {
     // async signIn(message) { /* on successful sign in */ },
     // async signOut(message) { /* on signout */ },
     async createUser(message) {
-      genActivationToken(message.user.id);
+      const { id, email, name } = message.user;
+      genActivationToken(id, email, name);
     }
     // async updateUser(message) { /* user updated - e.g. their email was verified */ },
     // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },

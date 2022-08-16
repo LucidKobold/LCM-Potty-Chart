@@ -1,5 +1,6 @@
 import React from "react";
 import { Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import { getSession } from "next-auth/react";
 
 const VerifyPage = (): JSX.Element => {
   return (
@@ -62,6 +63,18 @@ const VerifyPage = (): JSX.Element => {
       </VStack>
     </VStack>
   );
+};
+
+VerifyPage.getInitialProps = async ({ req, res }) => {
+  const session = await getSession({ req });
+
+  if (session && res) {
+    res.writeHead(302, {
+      Location: "/"
+    });
+    res.end();
+    return;
+  }
 };
 
 export default VerifyPage;

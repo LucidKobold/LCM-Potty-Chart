@@ -23,7 +23,6 @@ const validateToken = ({
   let flag = false;
   let message =
     "An error ocurred when checking if your account was activated. Please try again.";
-  console.info(validated, userId, validatedAt, expires);
 
   if (
     validated === undefined ||

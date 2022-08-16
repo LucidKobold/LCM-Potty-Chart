@@ -147,8 +147,7 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
   );
 };
 
-SignInPage.getInitialProps = async (context) => {
-  const { req, res } = context;
+SignInPage.getInitialProps = async ({ req, res }) => {
   const session = await getSession({ req });
 
   if (session && res) {
