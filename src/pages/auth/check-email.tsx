@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const VerifyPage = (): JSX.Element => {
+  const router = useRouter();
+
+  // User session and profile
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session && status !== "loading") {
+      router.push("/");
+    }
+  }, [router, session, status]);
+
   return (
     <VStack
       h="100%"
@@ -63,18 +75,6 @@ const VerifyPage = (): JSX.Element => {
       </VStack>
     </VStack>
   );
-};
-
-VerifyPage.getInitialProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-
-  if (session && res) {
-    res.writeHead(302, {
-      Location: "/"
-    });
-    res.end();
-    return;
-  }
 };
 
 export default VerifyPage;
