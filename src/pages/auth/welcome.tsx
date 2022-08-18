@@ -5,11 +5,14 @@ import ModifyAccount from "../../components/welcome/ModifyAccount";
 import fetchActivationStatus from "../../../lib/activation/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
 import DisplayMessage from "../../components/auth/DisplayMessage";
+import { useRouter } from "next/router";
 
 // TODO: On this page users will see the tutorial, have a chance to edit their info, customize their privacy settings, and add their friends.
 
 const NewUserPage = (): JSX.Element => {
-  const { data: session /*, status */ } = useSession();
+  const router = useRouter();
+
+  const { data: session, status } = useSession();
 
   const [tokenStatus, setTokenStatus] = useState<{
     status: boolean | null;
@@ -33,7 +36,11 @@ const NewUserPage = (): JSX.Element => {
         });
       }
     }
-  }, [session]);
+
+    if (!session && status !== "loading") {
+      router.push("/auth/signin")
+    }
+  }, [router, session, status]);
 
   return session ? (
     tokenStatus.status === null ? (
@@ -47,7 +54,7 @@ const NewUserPage = (): JSX.Element => {
       <DisplayMessage message={tokenStatus.message} error />
     )
   ) : (
-    <DisplayMessage message="Please register to see the welcome page!" error />
+    <DisplayMessage message="Please register to see the welcome page! Redirecting to signin page..." error />
   );
 };
 

@@ -16,9 +16,14 @@ const VerifyPage = (): JSX.Element => {
     }
   }, [router, session, status]);
 
-  return (
-    <DisplayMessage message="Please check your email for the link to login to your account." />
-  );
+  return session ?
+    (
+      <DisplayMessage message="Please check your email for the link to login to your account." />
+    )
+    :
+    (
+      <DisplayMessage message="Looks like you are already signed in. Redirecting to home..." error />
+    )
 };
 
 export default VerifyPage;
