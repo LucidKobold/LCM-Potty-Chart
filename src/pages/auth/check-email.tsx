@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import DisplayMessage from "../../components/auth/DisplayMessage";
@@ -16,14 +15,14 @@ const VerifyPage = (): JSX.Element => {
     }
   }, [router, session, status]);
 
-  return session ?
-    (
-      <DisplayMessage message="Please check your email for the link to login to your account." />
-    )
-    :
-    (
-      <DisplayMessage message="Looks like you are already signed in. Redirecting to home..." error />
-    )
+  return session ? (
+    <DisplayMessage message="Please check your email for the link to login to your account." />
+  ) : (
+    <DisplayMessage
+      message="Looks like you are already signed in. Redirecting to home..."
+      error
+    />
+  );
 };
 
 export default VerifyPage;

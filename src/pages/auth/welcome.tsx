@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { Box } from "@chakra-ui/react";
 import ModifyAccount from "../../components/welcome/ModifyAccount";
 import fetchActivationStatus from "../../../lib/activation/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
@@ -38,7 +37,7 @@ const NewUserPage = (): JSX.Element => {
     }
 
     if (!session && status !== "loading") {
-      router.push("/auth/signin")
+      router.push("/auth/signin");
     }
   }, [router, session, status]);
 
@@ -54,7 +53,10 @@ const NewUserPage = (): JSX.Element => {
       <DisplayMessage message={tokenStatus.message} error />
     )
   ) : (
-    <DisplayMessage message="Please register to see the welcome page! Redirecting to signin page..." error />
+    <DisplayMessage
+      message="Please register to see the welcome page! Redirecting to signin page..."
+      error
+    />
   );
 };
 
