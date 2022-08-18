@@ -49,6 +49,8 @@ const NewUserPage = (): JSX.Element => {
         <Title title="Not Activated" />
         <DisplayMessage
           message="Your account doesn't have an activation token. Please re-generate one. Contact support if this issue persists."
+          regenButton
+          userid={session.user.id}
           error
         />
       </Box>
