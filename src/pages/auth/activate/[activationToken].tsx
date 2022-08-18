@@ -34,7 +34,7 @@ const ActivateAccount = (): JSX.Element => {
 
   useEffect(() => {
     if (!session && status !== "loading") {
-      router.push("/auth/sigin");
+      router.push("/auth/signin");
     }
 
     if (activationToken && !Array.isArray(activationToken) && session) {
