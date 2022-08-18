@@ -42,6 +42,7 @@ const StickerSelector = ({
           bg={selectedSticker === 1 && "gray.800"}
           onClick={() => updateSelectedSticker(1)}
           variant="stickerButton"
+          type="button"
         >
           <DemoStickers stickerVal={1} />
         </Button>
@@ -52,6 +53,7 @@ const StickerSelector = ({
           bg={selectedSticker === 0 && "gray.800"}
           onClick={() => updateSelectedSticker(0)}
           variant="stickerButton"
+          type="button"
         >
           <DemoStickers stickerVal={0} />
         </Button>
@@ -61,6 +63,7 @@ const StickerSelector = ({
           bg={selectedSticker === -1 && "gray.800"}
           onClick={() => updateSelectedSticker(-1)}
           variant="stickerButton"
+          type="button"
         >
           <DemoStickers stickerVal={-1} />
         </Button>

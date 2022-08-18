@@ -42,6 +42,7 @@ const SignInButton = ({
       w="100%"
       variant="signIn"
       onClick={() => signIn(id)}
+      type="button"
     >
       {`Sign in with ${provider.split(" ")[0]}`}
     </Button>

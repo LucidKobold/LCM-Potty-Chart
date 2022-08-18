@@ -178,7 +178,14 @@ const Header = (): JSX.Element => {
             }}
           >
             <PopoverTrigger>
-              <Button rounded="full" variant="nav" cursor="pointer" p={0} m={0}>
+              <Button
+                rounded="full"
+                variant="nav"
+                cursor="pointer"
+                p={0}
+                m={0}
+                type="button"
+              >
                 {session ? (
                   status === "loading" ? (
                     <SkeletonCircle size="1.5rem" />

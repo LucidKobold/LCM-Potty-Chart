@@ -112,6 +112,7 @@ const AddUpdateSticker = ({
               selectedSticker === null || selectedSticker === currSticker
             }
             onClick={() => handleSubmit(selectedSticker)}
+            type="button"
           >
             {"Submit"}
           </Button>
@@ -156,6 +157,7 @@ const AddUpdateSticker = ({
               selectedSticker === null || selectedSticker === currSticker
             }
             onClick={() => updateStep(step + 1)}
+            type="button"
           >
             {"Next"}
           </Button>
@@ -199,7 +201,11 @@ const AddUpdateSticker = ({
             justifyContent="space-between"
             alignContent="center"
           >
-            <Button variant="primary" onClick={() => updateStep(step - 1)}>
+            <Button
+              variant="primary"
+              onClick={() => updateStep(step - 1)}
+              type="button"
+            >
               {"Previous"}
             </Button>
             <HStack w="auto" h="auto" alignContent="center" spacing={6}>
@@ -216,6 +222,7 @@ const AddUpdateSticker = ({
                   selectedSticker === null || selectedSticker === currSticker
                 }
                 onClick={() => handleSubmit(selectedSticker)}
+                type="button"
               >
                 {"Confirm"}
               </Button>
@@ -252,6 +259,7 @@ const AddUpdateSticker = ({
               fontSize="2rem"
               px="1"
               onClick={() => updateIsOpen(!isOpen)}
+              type="button"
             >
               <Icon icon="bi:x" />
             </Button>

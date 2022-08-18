@@ -20,7 +20,9 @@ const CustomButton = ({
   return (
     <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <Link href={link} target={newTab ? "_blank" : "_self"} rel="noopener">
-        <Button variant={type}>{text}</Button>
+        <Button variant={type} type="button">
+          {text}
+        </Button>
       </Link>
     </MotionBox>
   );

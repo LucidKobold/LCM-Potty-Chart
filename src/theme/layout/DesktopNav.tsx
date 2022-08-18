@@ -17,7 +17,9 @@ const DesktopNav = (): JSX.Element => {
       {navItems.map((navItem: NavItem) => {
         return (
           <Link id={"dekstop-" + navItem[0]} key={navItem[0]} href={navItem[1]}>
-            <Button variant="nav">{navItem[0]}</Button>
+            <Button variant="nav" type="button">
+              {navItem[0]}
+            </Button>
           </Link>
         );
       })}

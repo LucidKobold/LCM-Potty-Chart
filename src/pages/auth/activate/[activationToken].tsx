@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 /**
  * TODO:Fetch the token to make sure it is valid before attempting to activate it.
@@ -33,10 +33,10 @@ const ActivateAccount = (): JSX.Element => {
   useEffect(() => {
     if (activationToken) {
       updatedToken({ variables: { activationToken: activationToken } })
-        .then((res) => {
+        .then(() => {
           router.push("/auth/welcome");
         })
-        .catch((err) => {
+        .catch(() => {
           console.warn(
             "An error occurred while trying to find the provided token."
           );

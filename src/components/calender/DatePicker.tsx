@@ -135,7 +135,7 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
   return (
     <Popover placement="bottom" initialFocusRef={initRef}>
       <PopoverTrigger>
-        <Button border="none" variant="outline">
+        <Button border="none" variant="outline" type="button">
           {isLoading ? (
             <Skeleton>
               <Heading w="100%" h="auto">

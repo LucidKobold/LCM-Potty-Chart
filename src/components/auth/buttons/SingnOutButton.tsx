@@ -10,6 +10,7 @@ const SignOutButton = (): JSX.Element => {
       w="fit-content"
       variant="signIn"
       onClick={() => signOut()}
+      type="button"
     >
       {`Signout`}
     </Button>

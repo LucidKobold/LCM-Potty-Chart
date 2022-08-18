@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Divider, Heading, Image, Text, VStack } from "@chakra-ui/react";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const VerifyPage = (): JSX.Element => {

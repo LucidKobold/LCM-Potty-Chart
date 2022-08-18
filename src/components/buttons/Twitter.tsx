@@ -16,6 +16,7 @@ const Twitter = (): JSX.Element => {
         <Button
           variant="twitter"
           leftIcon={<Icon icon="akar-icons:twitter-fill" />}
+          type="button"
         >
           {"Dev Updates"}
         </Button>

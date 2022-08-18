@@ -41,7 +41,7 @@ const MobileNav: FC<MobileNavProps> = ({ updateOpen }: MobileNavProps) => {
           >
             <Link onClick={() => updateOpen(false)} href={navItem[1]}>
               {index === 0 ? <MenuDivider /> : <Fragment></Fragment>}
-              <Button w="100vw" variant={"nav"} p={0} m="auto">
+              <Button w="100vw" variant={"nav"} p={0} m="auto" type="button">
                 {navItem[0]}
               </Button>
               <MenuDivider />
