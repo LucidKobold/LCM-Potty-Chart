@@ -18,7 +18,7 @@ const NewUserPage = (): JSX.Element => {
     message: string;
   }>({
     status: false,
-    message: "Status not checked."
+    message: ""
   });
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const NewUserPage = (): JSX.Element => {
     }
   }, [router, session, status]);
 
-  return session ? (
+  return session && status !== "loading" ? (
     tokenStatus.status === null ? (
       <DisplayMessage
         message="Your account doesn't have an activation token. Please re-generate one. Contact support if this issue persists."
@@ -52,11 +52,13 @@ const NewUserPage = (): JSX.Element => {
     ) : (
       <DisplayMessage message={tokenStatus.message} error />
     )
-  ) : (
+  ) : !session && status !== "loading" ? (
     <DisplayMessage
       message="Please register to see the welcome page! Redirecting to signin page..."
       error
     />
+  ) : (
+    <DisplayMessage message="Fetching your account details..." loading />
   );
 };
 
