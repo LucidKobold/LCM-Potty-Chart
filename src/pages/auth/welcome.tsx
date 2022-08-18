@@ -4,6 +4,7 @@ import { Box } from "@chakra-ui/react";
 import ModifyAccount from "../../components/welcome/ModifyAccount";
 import fetchActivationStatus from "../../../lib/activation/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
+import DisplayMessage from "../../components/auth/DisplayMessage";
 
 // TODO: On this page users will see the tutorial, have a chance to edit their info, customize their privacy settings, and add their friends.
 
@@ -35,21 +36,18 @@ const NewUserPage = (): JSX.Element => {
   }, [session]);
 
   return session ? (
-    <Box pt="50px">
-      {tokenStatus.status === null ? (
-        <Box>
-          {
-            "Your account doesn't have an activation token. Please re-generate one. Contact support if this issue persists."
-          }
-        </Box>
-      ) : tokenStatus.status ? (
-        <ModifyAccount />
-      ) : (
-        <Box>{tokenStatus.message}</Box>
-      )}
-    </Box>
+    tokenStatus.status === null ? (
+      <DisplayMessage
+        message="Your account doesn't have an activation token. Please re-generate one. Contact support if this issue persists."
+        error
+      />
+    ) : tokenStatus.status ? (
+      <ModifyAccount />
+    ) : (
+      <DisplayMessage message={tokenStatus.message} error />
+    )
   ) : (
-    <Box pt="50px">{"Please register to see the welcome page!"}</Box>
+    <DisplayMessage message="Please register to see the welcome page!" error />
   );
 };
 

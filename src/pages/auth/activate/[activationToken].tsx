@@ -10,6 +10,8 @@ import { Box } from "@chakra-ui/react";
  * ? direct the user to the welcome page.
  */
 
+// TODO: Make a welcome email and send it when the activation is successful.
+
 const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
   const { activationToken } = router.query;
