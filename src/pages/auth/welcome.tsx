@@ -48,7 +48,11 @@ const NewUserPage = (): JSX.Element => {
         error
       />
     ) : tokenStatus.status ? (
-      <ModifyAccount />
+      <ModifyAccount
+        name={session.user.name}
+        email={session.user.email}
+        image={session.user.image}
+      />
     ) : (
       <DisplayMessage message={tokenStatus.message} error />
     )

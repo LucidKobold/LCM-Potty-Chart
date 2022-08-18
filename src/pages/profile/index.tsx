@@ -1,40 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Box, VStack } from "@chakra-ui/react";
-import LoadingOverlay from "../../components/loading/LoadingOverlay";
 import ProfileHeader from "../../components/profile/ProfileHeader";
+import { useRouter } from "next/router";
+import DisplayMessage from "../../components/auth/DisplayMessage";
 
 const UserProfile = (): JSX.Element => {
+  const router = useRouter();
+
   const { data: session, status } = useSession();
 
+  useEffect(() => {
+    if (!session && status !== "loading") {
+      router.push("/auth/signin");
+    }
+  }, [router, session, status]);
+
   return status === "loading" ? (
-    <VStack
-      pt="50px"
-      w="100%"
-      h="auto"
-      justifyContent="center"
-      alignContent="center"
-    >
-      <LoadingOverlay />
-      <ProfileHeader loading={true} />
-    </VStack>
+    <ProfileHeader loading={true} />
   ) : session ? (
-    <VStack
-      pt="50px"
-      w="100%"
-      h="auto"
-      justifyContent="center"
-      alignContent="center"
-    >
-      <ProfileHeader
-        name={session.user.name}
-        email={session.user.email}
-        image={session.user.image}
-        loading={false}
-      />
-    </VStack>
+    <ProfileHeader
+      name={session.user.name}
+      email={session.user.email}
+      image={session.user.image}
+      loading={false}
+    />
   ) : (
-    <Box pt="50px">{"You must be logged in to view your profile."}</Box>
+    <DisplayMessage
+      message="You must be logged in to view your profile. Redirecting to the signin page..."
+      error
+    />
   );
 };
 
