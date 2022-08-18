@@ -8,17 +8,22 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import LoadingSpinner from "../loading/LoadingSpinner";
+import RegenActivationTokenButton from "./buttons/RegenActivationTokenButton";
 
 interface DisplayMessageProps {
   message: string;
   loading?: boolean;
   error?: boolean;
+  regenButton?: boolean;
+  userid?: string;
 }
 
 const DisplayMessage = ({
   message,
   loading,
-  error
+  error,
+  regenButton,
+  userid
 }: DisplayMessageProps): JSX.Element => {
   return (
     <VStack
@@ -88,6 +93,7 @@ const DisplayMessage = ({
               {message}
             </Text>
           </HStack>
+          {regenButton && <RegenActivationTokenButton userId={userid} />}
         </VStack>
       </VStack>
     </VStack>

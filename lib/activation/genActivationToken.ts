@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { addDays } from "date-fns";
 import apolloClient from "../apollo";
-import sendActivationCodeEmail from "./sendActivationCodeEmail";
+import sendActivationCodeEmail from "./email/sendActivationCodeEmail";
 
 const genActivationToken = (
   userId: string,

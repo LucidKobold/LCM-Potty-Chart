@@ -20,6 +20,20 @@ const publicResolvers = {
         }
       });
     },
+    regenerateActivationToken: async (
+      _parent,
+      { userId, expires, newToken },
+      ctx
+    ) => {
+      const user = await ctx.prisma.user.findUnique({ where: { id: userId } });
+      return await ctx.prisma.activationToken.update({
+        where: { userId: user.id },
+        data: {
+          token: newToken,
+          expires: expires
+        }
+      });
+    },
     activateAccount: async (_parent, { activationToken }, ctx) =>
       await ctx.prisma.activationToken.update({
         where: {

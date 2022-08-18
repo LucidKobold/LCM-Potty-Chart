@@ -1,8 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { gql, useMutation } from "@apollo/client";
+import { useSession } from "next-auth/react";
 import { Box } from "@chakra-ui/react";
 import Title from "../../../components/title";
+import fetchActivationStatus from "../../../../lib/activation/fetchActivationStatus";
+import tokenReadyToActivate from "../../../../lib/activation/tokenReadyToActivate";
+import activateAccount from "../../../../lib/activation/activateAccount";
+import DisplayMessage from "../../../components/auth/DisplayMessage";
+
+interface Errors {
+  error: boolean;
+  errorMessage: string;
+  validated: boolean;
+  needRegenerate: boolean;
+}
 
 /**
  * TODO:Fetch the token to make sure it is valid before attempting to activate it.
@@ -17,42 +28,82 @@ const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
   const { activationToken } = router.query;
 
-  const UPDATE_ACTIVATEACCOUNT = gql`
-    mutation ActivateAccount($activationToken: String!) {
-      activateAccount(activationToken: $activationToken) {
-        id
-        userId
-        token
-        validated
-        validatedAt
-        createdAt
-        updatedAt
-      }
-    }
-  `;
+  const { data: session, status } = useSession();
 
-  const [updatedToken, { data }] = useMutation(UPDATE_ACTIVATEACCOUNT);
+  const [errors, setErrors] = useState<Errors>({} as Errors);
 
   useEffect(() => {
-    if (activationToken) {
-      updatedToken({ variables: { activationToken: activationToken } })
-        .then(() => {
-          router.push("/auth/welcome");
-        })
-        .catch(() => {
-          console.warn(
-            "An error occurred while trying to find the provided token."
+    if (!session && status !== "loading") {
+      router.push("/auth/sigin");
+    }
+
+    if (activationToken && !Array.isArray(activationToken) && session) {
+      fetchActivationStatus
+        .withToken(activationToken)
+        .then((res) => {
+          const token = res.data.getVerificationWithToken;
+          const tokenReady = tokenReadyToActivate(
+            session.user.id,
+            token,
+            activationToken
           );
+
+          if (tokenReady.ready && !tokenReady.error.error) {
+            console.info("Activating");
+            activateAccount(activationToken);
+            router.push("/auth/welcome");
+          }
+
+          if (tokenReady.error.error && tokenReady.error.validated) {
+            router.push("/auth/welcome");
+          }
+
+          setErrors(tokenReady.error);
+        })
+        .catch((err) => {
+          setErrors({
+            error: true,
+            errorMessage:
+              "An error occurred when fetching your activation status. Please try again. Contact support if this issue persists.",
+            validated: false,
+            needRegenerate: false
+          });
+          console.error(err);
         });
     }
-  }, [activationToken, data, router, updatedToken]);
+  }, [activationToken, router, session, status]);
 
-  return (
-    <Box pt="50px">
-      <Title title="Activating account..." />
-      {!data
-        ? "An error occurred or this wasn't a valid activation token."
-        : "Activating your account..."}
+  return session ? (
+    errors.error ? (
+      errors.needRegenerate ? (
+        <Box>
+          <Title title="Error" />
+          <DisplayMessage
+            message={errors.errorMessage}
+            error
+            regenButton
+            userid={session.user.id}
+          />
+        </Box>
+      ) : (
+        <Box>
+          <Title title="Error" />
+          <DisplayMessage message={errors.errorMessage} error />
+        </Box>
+      )
+    ) : (
+      <Box>
+        <Title title="Activating Account..." />
+        <DisplayMessage message="Activating your account" loading />
+      </Box>
+    )
+  ) : (
+    <Box>
+      <Title title="Redirecting..." />
+      <DisplayMessage
+        message="You must be signed in to activate your account. Redirecting you to the signin page..."
+        error
+      />
     </Box>
   );
 };

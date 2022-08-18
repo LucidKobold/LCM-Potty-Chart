@@ -93,6 +93,11 @@ const typeDefs = gql`
 
   type Mutation {
     genVerificationToken(userId: String!, expires: Date!): ActivationToken!
+    regenerateActivationToken(
+      userId: String!
+      expires: Date!
+      newToken: String!
+    ): ActivationToken!
     activateAccount(activationToken: String!): ActivationToken!
   }
 `;
