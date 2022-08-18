@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
 import { Box } from "@chakra-ui/react";
+import Title from "../../../components/title";
 
 /**
  * TODO:Fetch the token to make sure it is valid before attempting to activate it.
@@ -48,6 +49,7 @@ const ActivateAccount = (): JSX.Element => {
 
   return (
     <Box pt="50px">
+      <Title title="Activating account..." />
       {!data
         ? "An error occurred or this wasn't a valid activation token."
         : "Activating your account..."}

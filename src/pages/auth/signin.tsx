@@ -11,6 +11,7 @@ import {
 import { BuiltInProviderType } from "next-auth/providers";
 import SignInButton from "../../components/auth/buttons/SignInButton";
 import EmailForm from "../../components/auth/EmailForm";
+import Title from "../../components/title";
 
 interface SignInPageProps {
   providers: Record<
@@ -56,6 +57,7 @@ const SignInPage = ({ providers }: SignInPageProps): JSX.Element => {
       justifyContent="center"
       alignContent="center"
     >
+      <Title title="Signin" />
       <VStack
         h="auto"
         w={{ base: "95vw", sm: "90vw", md: "85vw", lg: "65vw" }}

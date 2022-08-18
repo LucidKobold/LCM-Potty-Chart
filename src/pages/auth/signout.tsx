@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Box } from "@chakra-ui/react";
 import DisplayMessage from "../../components/auth/DisplayMessage";
+import Title from "../../components/title";
 
 const SignOutPage = (): JSX.Element => {
   const router = useRouter();
@@ -17,7 +19,12 @@ const SignOutPage = (): JSX.Element => {
     router.push("/");
   }, [router, session, status]);
 
-  return <DisplayMessage message="Signing you out..." loading />;
+  return (
+    <Box>
+      <Title title="Signing out..." />
+      <DisplayMessage message="Signing you out..." loading />
+    </Box>
+  );
 };
 
 export default SignOutPage;

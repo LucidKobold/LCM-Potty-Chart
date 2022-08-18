@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Box } from "@chakra-ui/react";
 import DisplayMessage from "../../components/auth/DisplayMessage";
+import Title from "../../components/title";
 
 const VerifyPage = (): JSX.Element => {
   const router = useRouter();
@@ -16,12 +18,18 @@ const VerifyPage = (): JSX.Element => {
   }, [router, session, status]);
 
   return session ? (
-    <DisplayMessage message="Please check your email for the link to login to your account." />
+    <Box>
+      <Title title="Check Email" />
+      <DisplayMessage message="Please check your email for the link to login to your account." />
+    </Box>
   ) : (
-    <DisplayMessage
-      message="Looks like you are already signed in. Redirecting to home..."
-      error
-    />
+    <Box>
+      <Title title="redirecting" />
+      <DisplayMessage
+        message="Looks like you are already signed in. Redirecting to home..."
+        error
+      />
+    </Box>
   );
 };
 

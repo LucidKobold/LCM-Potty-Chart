@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { Box } from "@chakra-ui/react";
 import ModifyAccount from "../../components/welcome/ModifyAccount";
 import fetchActivationStatus from "../../../lib/activation/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
 import DisplayMessage from "../../components/auth/DisplayMessage";
-import { useRouter } from "next/router";
+import Title from "../../components/title";
 
 // TODO: On this page users will see the tutorial, have a chance to edit their info, customize their privacy settings, and add their friends.
 
@@ -43,26 +45,41 @@ const NewUserPage = (): JSX.Element => {
 
   return session && status !== "loading" ? (
     tokenStatus.status === null ? (
-      <DisplayMessage
-        message="Your account doesn't have an activation token. Please re-generate one. Contact support if this issue persists."
-        error
-      />
+      <Box>
+        <Title title="Not Activated" />
+        <DisplayMessage
+          message="Your account doesn't have an activation token. Please re-generate one. Contact support if this issue persists."
+          error
+        />
+      </Box>
     ) : tokenStatus.status ? (
-      <ModifyAccount
-        name={session.user.name}
-        email={session.user.email}
-        image={session.user.image}
-      />
+      <Box>
+        <Title title="Modify Your Account" />
+        <ModifyAccount
+          name={session.user.name}
+          email={session.user.email}
+          image={session.user.image}
+        />
+      </Box>
     ) : (
-      <DisplayMessage message={tokenStatus.message} error />
+      <Box>
+        <Title title="Error" />
+        <DisplayMessage message={tokenStatus.message} error />
+      </Box>
     )
   ) : !session && status !== "loading" ? (
-    <DisplayMessage
-      message="Please register to see the welcome page! Redirecting to signin page..."
-      error
-    />
+    <Box>
+      <Title title="Redirecting..." />
+      <DisplayMessage
+        message="Please register to see the welcome page! Redirecting to signin page..."
+        error
+      />
+    </Box>
   ) : (
-    <DisplayMessage message="Fetching your account details..." loading />
+    <Box>
+      <Title title="Loading" />
+      <DisplayMessage message="Fetching your account details..." loading />
+    </Box>
   );
 };
 
