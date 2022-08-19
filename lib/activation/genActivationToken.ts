@@ -1,13 +1,8 @@
 import { gql } from "@apollo/client";
 import { addDays } from "date-fns";
 import apolloClient from "../apollo";
-import sendActivationCodeEmail from "./email/sendActivationCodeEmail";
 
-const genActivationToken = (
-  userId: string,
-  userEmail: string,
-  name = "User"
-): void => {
+const genActivationToken = (userId: string): void => {
   const CREATE_GENVERIFICATIONTOKEN = gql`
     mutation Mutation($userId: String!, $expires: Date!) {
       genVerificationToken(userId: $userId, expires: $expires) {
@@ -25,21 +20,13 @@ const genActivationToken = (
 
   const expDate: Date = addDays(new Date(), 1);
 
-  apolloClient
-    .mutate({
-      mutation: CREATE_GENVERIFICATIONTOKEN,
-      variables: {
-        userId: userId,
-        expires: expDate
-      }
-    })
-    .then((res) => {
-      sendActivationCodeEmail(
-        res.data.genVerificationToken.token,
-        userEmail,
-        name
-      );
-    });
+  apolloClient.mutate({
+    mutation: CREATE_GENVERIFICATIONTOKEN,
+    variables: {
+      userId: userId,
+      expires: expDate
+    }
+  });
 };
 
 export default genActivationToken;
