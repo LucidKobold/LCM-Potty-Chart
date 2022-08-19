@@ -1,3 +1,5 @@
+import sendActivationCodeEmail from "../lib/activation/email/sendActivationCodeEmail";
+
 const publicResolvers = {
   Query: {
     users: async (_parent, _args, ctx) => await ctx.prisma.user.findMany(),
@@ -26,13 +28,18 @@ const publicResolvers = {
       ctx
     ) => {
       const user = await ctx.prisma.user.findUnique({ where: { id: userId } });
-      return await ctx.prisma.activationToken.update({
+      const updatedToken = await ctx.prisma.activationToken.update({
         where: { userId: user.id },
         data: {
           token: newToken,
           expires: expires
         }
       });
+
+      if (updatedToken.token) {
+        sendActivationCodeEmail(updatedToken.token, user.email, user.name);
+        return updatedToken;
+      }
     },
     activateAccount: async (_parent, { activationToken }, ctx) =>
       await ctx.prisma.activationToken.update({
