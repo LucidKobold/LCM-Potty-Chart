@@ -3,7 +3,7 @@ import { addDays } from "date-fns";
 import cuid from "cuid";
 import apolloClient from "../apollo";
 
-const regenerateActivationToken = (userId: string) => {
+const regenerateActivationToken = (userId: string): void => {
   const UPDATE_REGENERATEACTIVATIONTOKEN = gql`
     mutation RegenerateActivationToken(
       $userId: String!

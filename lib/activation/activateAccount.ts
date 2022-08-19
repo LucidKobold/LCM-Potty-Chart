@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-micro";
 import apolloClient from "../apollo";
 
-const activateAccount = (activationToken: string) => {
+const activateAccount = (activationToken: string): void => {
   const UPDATE_ACTIVATEACCOUNT = gql`
     mutation ActivateAccount($activationToken: String!) {
       activateAccount(activationToken: $activationToken) {

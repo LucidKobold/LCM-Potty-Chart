@@ -6,8 +6,7 @@ const sendActivationCodeEmail = (
   activationCode: string,
   userEmail: string,
   name = "User"
-) => {
-  console.info("Send message.");
+): void => {
   // Environment
   const environment = process.env.NODE_ENV || "development";
 
@@ -30,7 +29,9 @@ const sendActivationCodeEmail = (
     subject: `Hello ${name}, please activate your account for LCM Potty Chart with the lint provided.`,
     html: `
     <div>
-      <a href="${process.env.NEXTAUTH_URL}/auth/activate/${activationCode}">Activate your account.</a>
+      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate/${activationCode}">Activate your account.</a></p>
+      <p>You are receiving this email because your email was used to register an account within the app.</p>
+      <p>If you did not try to register an account please disregard this email and your account will be deleted within a few days.</p>
     </div>
     `
   };

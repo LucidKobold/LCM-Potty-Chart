@@ -7,7 +7,7 @@ const genActivationToken = (
   userId: string,
   userEmail: string,
   name = "User"
-) => {
+): void => {
   const CREATE_GENVERIFICATIONTOKEN = gql`
     mutation Mutation($userId: String!, $expires: Date!) {
       genVerificationToken(userId: $userId, expires: $expires) {
@@ -34,7 +34,6 @@ const genActivationToken = (
       }
     })
     .then((res) => {
-      console.info(res.data.genVerificationToken.token);
       sendActivationCodeEmail(
         res.data.genVerificationToken.token,
         userEmail,
