@@ -27,20 +27,23 @@ const NewUserPage = (): JSX.Element => {
     if (session) {
       if (session.user) {
         const { id } = session.user;
-        fetchActivationStatus.withUserId(id).then((res) => {
-          setTokenStatus(
-            validateToken({
-              ...res.data.getVerificationWithUserId,
-              sessionUserId: id
-            })
-          );
-        }).catch(err => {
-          console.error(err);
-          setTokenStatus({
-            status: null,
-            message: ""
+        fetchActivationStatus
+          .withUserId(id)
+          .then((res) => {
+            setTokenStatus(
+              validateToken({
+                ...res.data.getVerificationWithUserId,
+                sessionUserId: id
+              })
+            );
           })
-        });
+          .catch((err) => {
+            console.error(err);
+            setTokenStatus({
+              status: null,
+              message: ""
+            });
+          });
       }
     }
 
