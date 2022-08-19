@@ -1,4 +1,5 @@
 import sendActivationCodeEmail from "../lib/activation/email/sendActivationCodeEmail";
+import sendWelcomeEmail from "../lib/activation/email/sendWelcomeEmail";
 
 const publicResolvers = {
   Query: {
@@ -15,12 +16,16 @@ const publicResolvers = {
   Mutation: {
     genVerificationToken: async (_parent, { userId, expires }, ctx) => {
       const user = await ctx.prisma.user.findUnique({ where: { id: userId } });
-      return await ctx.prisma.activationToken.create({
+      const newToken = await ctx.prisma.activationToken.create({
         data: {
           userId: user.id,
           expires: expires
         }
       });
+
+      if (newToken.token) {
+        sendActivationCodeEmail(newToken.token, user.email, user.name);
+      }
     },
     regenerateActivationToken: async (
       _parent,
@@ -41,8 +46,8 @@ const publicResolvers = {
         return updatedToken;
       }
     },
-    activateAccount: async (_parent, { activationToken }, ctx) =>
-      await ctx.prisma.activationToken.update({
+    activateAccount: async (_parent, { activationToken }, ctx) => {
+      const activatedToken = await ctx.prisma.activationToken.update({
         where: {
           token: activationToken
         },
@@ -50,7 +55,15 @@ const publicResolvers = {
           validated: true,
           validatedAt: new Date()
         }
-      })
+      });
+
+      if (activatedToken.validated) {
+        const user = await ctx.prisma.user.findUnique({
+          where: { id: activatedToken.userId }
+        });
+        sendWelcomeEmail(user.email, user.name);
+      }
+    }
   },
   User: {
     accounts: async (parent, _args, ctx) =>
