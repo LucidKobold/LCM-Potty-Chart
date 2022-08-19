@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import LoadingSpinner from "../loading/LoadingSpinner";
+import GenActivationTokenButton from "./buttons/GenerateActivationToken";
 import RegenActivationTokenButton from "./buttons/RegenActivationTokenButton";
 
 interface DisplayMessageProps {
@@ -15,7 +16,8 @@ interface DisplayMessageProps {
   loading?: boolean;
   error?: boolean;
   regenButton?: boolean;
-  userid?: string;
+  genButton?: boolean;
+  userId?: string;
 }
 
 const DisplayMessage = ({
@@ -23,7 +25,8 @@ const DisplayMessage = ({
   loading,
   error,
   regenButton,
-  userid
+  genButton,
+  userId
 }: DisplayMessageProps): JSX.Element => {
   return (
     <VStack
@@ -93,7 +96,8 @@ const DisplayMessage = ({
               {message}
             </Text>
           </HStack>
-          {regenButton && <RegenActivationTokenButton userId={userid} />}
+          {regenButton && <RegenActivationTokenButton userId={userId} />}
+          {genButton && <GenActivationTokenButton userId={userId} />}
         </VStack>
       </VStack>
     </VStack>
