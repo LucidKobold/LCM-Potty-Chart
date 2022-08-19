@@ -82,7 +82,7 @@ const ActivateAccount = (): JSX.Element => {
             message={errors.errorMessage}
             error
             regenButton
-            userid={session.user.id}
+            userId={session.user.id}
           />
         </Box>
       ) : (
