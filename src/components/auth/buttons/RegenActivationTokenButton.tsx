@@ -7,6 +7,8 @@ interface RegenActivationTokenButtonProps {
   userId: string;
 }
 
+// TODO: Give user feedback when the new token is generated and take them to the welcome page.
+
 const RegenActivationTokenButton = ({
   userId
 }: RegenActivationTokenButtonProps): JSX.Element => {
