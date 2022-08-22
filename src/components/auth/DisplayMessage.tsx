@@ -10,6 +10,7 @@ import React from "react";
 import LoadingSpinner from "../loading/LoadingSpinner";
 import GenActivationTokenButton from "./buttons/GenerateActivationToken";
 import RegenActivationTokenButton from "./buttons/RegenActivationTokenButton";
+import ManualAccountActivationForm from "./ManualAccActivationForm";
 
 interface DisplayMessageProps {
   message: string;
@@ -18,6 +19,8 @@ interface DisplayMessageProps {
   regenButton?: boolean;
   genButton?: boolean;
   userId?: string;
+  manActivation?: boolean;
+  activate?: (activationToken: string) => void;
 }
 
 const DisplayMessage = ({
@@ -26,7 +29,9 @@ const DisplayMessage = ({
   error,
   regenButton,
   genButton,
-  userId
+  userId,
+  manActivation,
+  activate
 }: DisplayMessageProps): JSX.Element => {
   return (
     <VStack
@@ -98,6 +103,7 @@ const DisplayMessage = ({
           </HStack>
           {regenButton && <RegenActivationTokenButton userId={userId} />}
           {genButton && <GenActivationTokenButton userId={userId} />}
+          {manActivation && <ManualAccountActivationForm activate={activate} />}
         </VStack>
       </VStack>
     </VStack>

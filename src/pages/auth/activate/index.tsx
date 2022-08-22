@@ -1,0 +1,122 @@
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { Box } from "@chakra-ui/react";
+import Title from "../../../components/title";
+import fetchActivationStatus from "../../../../lib/activation/fetchActivationStatus";
+import tokenReadyToActivate from "../../../../lib/activation/tokenReadyToActivate";
+import activateAccount from "../../../../lib/activation/activateAccount";
+import DisplayMessage from "../../../components/auth/DisplayMessage";
+
+interface Errors {
+  error: boolean;
+  errorMessage: string;
+  validated: boolean;
+  needRegenerate: boolean;
+}
+
+/**
+ * TODO:Fetch the token to make sure it is valid before attempting to activate it.
+ * ? Display errors if the token is not found or is expired. Show a link the re-generate
+ * ? the token if the token was valid, but expired. If the token was already activated
+ * ? direct the user to the welcome page.
+ */
+
+// TODO: Make a welcome email and send it when the activation is successful.
+
+const ActivateAccount = (): JSX.Element => {
+  const router = useRouter();
+
+  const { data: session, status } = useSession();
+
+  const [errors, setErrors] = useState<Errors>({} as Errors);
+
+  useEffect(() => {
+    if (!session && status !== "loading") {
+      router.push("/auth/signin");
+    }
+  }, [router, session, status]);
+
+  const handleManualActivation = (activationToken: string): void => {
+    if (session) {
+      fetchActivationStatus
+        .withToken(activationToken)
+        .then((res) => {
+          const token = res.data.getVerificationWithToken;
+          console.info(token);
+          const tokenReady = tokenReadyToActivate(
+            session.user.id,
+            token,
+            activationToken
+          );
+
+          if (tokenReady.ready && !tokenReady.error.error) {
+            console.info("Activating");
+            activateAccount(activationToken);
+            router.push("/auth/welcome");
+          }
+
+          if (tokenReady.error.error && tokenReady.error.validated) {
+            router.push("/auth/welcome");
+          }
+
+          setErrors(tokenReady.error);
+        })
+        .catch((err) => {
+          setErrors({
+            error: true,
+            errorMessage:
+              "An error occurred when fetching your activation status. Please try again. Contact support if this issue persists.",
+            validated: false,
+            needRegenerate: false
+          });
+          console.error(err);
+        });
+    }
+  };
+
+  return session ? (
+    errors.error ? (
+      errors.needRegenerate ? (
+        <Box>
+          <Title title="Error" />
+          <DisplayMessage
+            message={errors.errorMessage}
+            error
+            regenButton
+            userId={session.user.id}
+          />
+        </Box>
+      ) : (
+        <Box>
+          <Title title="Error" />
+          <DisplayMessage
+            message={errors.errorMessage}
+            error
+            manActivation
+            activate={handleManualActivation}
+          />
+        </Box>
+      )
+    ) : (
+      <Box>
+        <Title title="Enter Activation Token" />
+        <DisplayMessage
+          message="Please enter your activation token"
+          manActivation
+          activate={handleManualActivation}
+        />
+      </Box>
+    )
+  ) : (
+    <Box>
+      <Title title="Redirecting..." />
+      <DisplayMessage
+        message="You must be signed in to activate your account. Redirecting you to the signin page..."
+        error
+      />
+    </Box>
+  );
+};
+
+export default ActivateAccount;
