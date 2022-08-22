@@ -15,15 +15,6 @@ interface Errors {
   needRegenerate: boolean;
 }
 
-/**
- * TODO:Fetch the token to make sure it is valid before attempting to activate it.
- * ? Display errors if the token is not found or is expired. Show a link the re-generate
- * ? the token if the token was valid, but expired. If the token was already activated
- * ? direct the user to the welcome page.
- */
-
-// TODO: Make a welcome email and send it when the activation is successful.
-
 const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
   const { activationToken } = router.query;

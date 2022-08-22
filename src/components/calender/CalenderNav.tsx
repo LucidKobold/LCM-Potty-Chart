@@ -13,6 +13,7 @@ interface CalenderNavProps {
 }
 
 /**
+ * Used to navigate between months of a chart.
  * @param {boolean} isLoading is the component loading?
  * @param {string} title the title for the current date.
  */

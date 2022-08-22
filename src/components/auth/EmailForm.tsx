@@ -17,6 +17,14 @@ interface EmailFormProps {
   signIn?: typeof signIn;
 }
 
+/**
+ * The email singin form. Will validate the email provided and invoke
+ * the singin function on submit.
+ * @param {string} provider the provider name from Next-Auth.
+ * @param {string} id the provider id from Next-Auth.
+ * @param sigin the signin function form Next-Auth
+ */
+
 const EmailForm = ({ provider, id, signIn }: EmailFormProps): JSX.Element => {
   // Form field valid statuses.
   const [validEmail, setValidEmail] = useState<boolean>(false);

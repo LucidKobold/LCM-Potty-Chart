@@ -23,6 +23,18 @@ interface DisplayMessageProps {
   activate?: (activationToken: string) => void;
 }
 
+/**
+ * Displays a message during the account activation.
+ * @param {string} message the message to be displayed.
+ * @param {boolean} loading display a spinner next to the text being displayed.
+ * @param {boolean} error displays the message in a red text.
+ * @param {boolean} regenButton displays the regenerate the account activation token button.
+ * @param {boolean} genButton displays the generate the account activation token button.
+ * @param {string} userId the user id for which to (re)generate the activation token.
+ * @param {boolean} manActivation displays the manual account activation form.
+ * @param activate the function to be called when the manual activation from is submitted.
+ */
+
 const DisplayMessage = ({
   message,
   loading,

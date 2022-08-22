@@ -8,6 +8,11 @@ import {
 } from "@chakra-ui/react";
 import LoadingSpinner from "./LoadingSpinner";
 
+/**
+ * Displays a loading element on top of all other elements in the app
+ * disabling user interaction until the loading is done.
+ */
+
 const LoadingOverlay = (): JSX.Element => {
   return (
     <Modal

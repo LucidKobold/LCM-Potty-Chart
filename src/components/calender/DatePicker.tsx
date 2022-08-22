@@ -35,6 +35,7 @@ interface DatePickerProps {
 }
 
 /**
+ * Allows the user to manually select a month to navigate to within their chart.
  * @param {boolean} isLoading is the component loading?
  * @param {string} title the title for the current date.
  */

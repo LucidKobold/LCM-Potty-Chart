@@ -11,6 +11,10 @@ interface TutorialProps {
   isLoading: boolean;
 }
 
+/**
+ * The full tutorial component.
+ */
+
 const Tutorial = ({ isLoading }: TutorialProps): JSX.Element => {
   return (
     <VStack

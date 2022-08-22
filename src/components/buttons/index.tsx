@@ -5,6 +5,11 @@ import links, { LinkObj } from "./data/links";
 import Patreon from "./Patreon";
 import Twitter from "./Twitter";
 
+/**
+ * Displays buttons about the app such as links to Patreon, development roadmap,
+ * Twitter, etc.
+ */
+
 const Buttons = (): JSX.Element => {
   return (
     <Box h="auto" w="100%">

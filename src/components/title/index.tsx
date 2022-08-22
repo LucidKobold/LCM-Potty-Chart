@@ -4,6 +4,10 @@ import React from "react";
 interface TitleProps {
   title: string;
 }
+/**
+ * Used to change the title of the page.
+ * @param {string} title the title of the page.
+ */
 
 const Title = ({ title }: TitleProps): JSX.Element => {
   return (

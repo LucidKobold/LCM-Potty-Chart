@@ -17,6 +17,15 @@ const logos = {
   Email: <Icon icon="ic:round-email" />
 };
 
+/**
+ * @param {string} provider the name of the signin provider (Google, GitHub, Twitter, Discord, etc).
+ * @param {string} id the id of the provider from Next-Auth.
+ * @param {typeof signIn} sigin the signin function from Next-Auth.
+ * @param {boolean} validForm used for the email signin. Signifies if the form data is valid.
+ * @param {boolean} isSubmitting used for the email signin. Signifies if the form data is submitting.
+ * @returns reusable signin buttons for the auth component.
+ */
+
 const SignInButton = ({
   provider,
   id,

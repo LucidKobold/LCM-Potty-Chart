@@ -1,6 +1,10 @@
 import React from "react";
 import { Spinner } from "@chakra-ui/react";
 
+/**
+ * Loading spinner to be used throughout the app.
+ */
+
 const LoadingSpinner = (): JSX.Element => {
   return (
     <Spinner

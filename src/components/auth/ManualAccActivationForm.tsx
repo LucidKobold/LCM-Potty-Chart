@@ -14,6 +14,12 @@ interface ManualAccountActivationFormProps {
   activate?: (activationToken: string) => void;
 }
 
+/**
+ * A form that will take in and validate an account activation token.
+ * Provided to the users if automatic activation fails.
+ * @param activate the activation function to be invoked on submit.
+ */
+
 const ManualAccountActivationForm = ({
   activate
 }: ManualAccountActivationFormProps): JSX.Element => {

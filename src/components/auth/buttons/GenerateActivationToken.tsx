@@ -9,6 +9,12 @@ interface RegenActivationTokenButtonProps {
 
 // TODO: Give user feedback when the new token is generated and take them to the welcome page.
 
+/**
+ * @param {string} userId the id of the user that needs their activation token generated.
+ * @returns reusable button to generate the account activation token of a user. Used in the
+ * activation and welcome components.
+ */
+
 const GenActivationTokenButton = ({
   userId
 }: RegenActivationTokenButtonProps): JSX.Element => {

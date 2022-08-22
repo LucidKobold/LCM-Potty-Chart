@@ -38,6 +38,7 @@ interface DayProps {
  * @param {date} selectedDate the date for the selected month.
  * @param {Date} currDate today's date.
  */
+
 const Day = ({
   isLoading,
   isOverflow,

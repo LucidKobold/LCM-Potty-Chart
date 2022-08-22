@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 
 const MotionBox = motion<BoxProps>(Box);
 
+/**
+ * Stylized Partreon button.
+ */
+
 const Patreon = (): JSX.Element => {
   return (
     <MotionBox whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>

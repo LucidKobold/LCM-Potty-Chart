@@ -11,6 +11,15 @@ interface CustomButtonProps {
 
 const MotionBox = motion<BoxProps>(Box);
 
+/**
+ * Used to generate custom motion buttons.
+ * @param {string} text what the button will display.
+ * @param {string} link where the button will take the user.
+ * @param {"primary" | "secondary" | "footer"} type the type of button
+ * to be used or displayed.
+ * @param {boolean} newTab should the link open in a new tab?
+ */
+
 const CustomButton = ({
   text,
   link,

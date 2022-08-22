@@ -6,6 +6,12 @@ import { isSameDay, format } from "date-fns";
 import CalenderNav from "./CalenderNav";
 import Day from "./Day";
 
+/**
+ * The main calender / chart component.
+ * @param date an object with the date info for which to display.
+ * @param {boolean} isLoading is the data current being fetched from the database?
+ */
+
 const Calender = ({
   date: newDate,
   isLoading

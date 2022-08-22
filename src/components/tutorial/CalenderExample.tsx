@@ -10,6 +10,11 @@ interface CalenderExampleProps {
   type: "add" | "edit";
   isLoading: boolean;
 }
+/**
+ * Example calender element to demo the functionality of the calender.
+ * @param {"add" | "edit"} type the type of demo to display.
+ * @param {boolean} type is the app loading data?
+ */
 
 const CalenderExample = ({
   type,
