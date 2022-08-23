@@ -3,17 +3,25 @@ import ProfileHeader from "../profile/ProfileHeader";
 
 interface ModifyAccountProps {
   name?: string;
-  email?: string;
+  username?: string;
   image?: string;
+  bio?: string;
 }
 
 const ModifyAccount = ({
   name,
-  email,
-  image
+  username,
+  image,
+  bio
 }: ModifyAccountProps): JSX.Element => {
   return (
-    <ProfileHeader name={name} email={email} image={image} loading={false} />
+    <ProfileHeader
+      name={name}
+      username={username}
+      image={image}
+      bio={bio}
+      loading={false}
+    />
   );
 };
 

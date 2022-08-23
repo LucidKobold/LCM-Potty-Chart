@@ -68,8 +68,9 @@ const NewUserPage = (): JSX.Element => {
         <Title title="Modify Your Account" />
         <ModifyAccount
           name={session.user.name}
-          email={session.user.email}
+          username={session.user.username}
           image={session.user.image}
+          bio={session.user.bio}
         />
       </Box>
     ) : (

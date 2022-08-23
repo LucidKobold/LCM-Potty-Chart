@@ -12,16 +12,16 @@ interface ProfileHeaderProps {
   name?: string;
   username?: string;
   image?: string;
-  loading: boolean;
   bio?: string;
+  loading: boolean;
 }
 
 /**
  * Profile info to be displayed on a user's profile page.
  * @param {string} name name of the user.
- * @param {string} email email of the user. Used to generate a username
- * for demonstration purposes.
- * @param {string} image image url for the user.
+ * @param {string} username username of the user.
+ * @param {string} image image url of the user.
+ * @param {string} bio bio of the user.
  * @param {string} loading is the user data being fetched from the session
  * or database?
  */
@@ -30,8 +30,8 @@ const ProfileHeader = ({
   name,
   username,
   image,
-  loading,
-  bio
+  bio,
+  loading
 }: ProfileHeaderProps): JSX.Element => {
   return loading ? (
     <VStack
@@ -117,7 +117,7 @@ const ProfileHeader = ({
           </Heading>
           {/* Simulating a username. Update later to use the username stored within the database. */}
           <Heading as="h2" size="md">
-            {username}
+            {`@${username}`}
           </Heading>
         </VStack>
         <Box>{bio}</Box>
