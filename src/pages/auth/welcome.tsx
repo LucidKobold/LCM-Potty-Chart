@@ -75,7 +75,15 @@ const NewUserPage = (): JSX.Element => {
     ) : (
       <Box>
         <Title title="Error" />
-        <DisplayMessage message={tokenStatus.message} error />
+        <DisplayMessage
+          message={tokenStatus.message}
+          error
+          toActivationPage={
+            tokenStatus.message.split("Account not activated").length > 1
+              ? true
+              : false
+          }
+        />
       </Box>
     )
   ) : !session && status !== "loading" ? (

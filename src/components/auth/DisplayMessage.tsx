@@ -7,6 +7,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import React from "react";
+import CustomButton from "../buttons/Custom";
 import LoadingSpinner from "../loading/LoadingSpinner";
 import GenActivationTokenButton from "./buttons/GenerateActivationToken";
 import RegenActivationTokenButton from "./buttons/RegenActivationTokenButton";
@@ -21,6 +22,7 @@ interface DisplayMessageProps {
   userId?: string;
   manActivation?: boolean;
   activate?: (activationToken: string) => void;
+  toActivationPage?: boolean;
 }
 
 /**
@@ -33,6 +35,7 @@ interface DisplayMessageProps {
  * @param {string} userId the user id for which to (re)generate the activation token.
  * @param {boolean} manActivation displays the manual account activation form.
  * @param activate the function to be called when the manual activation from is submitted.
+ * @param {boolean} toActivationPage displays a button that takes the user to the activation page.
  */
 
 const DisplayMessage = ({
@@ -43,7 +46,8 @@ const DisplayMessage = ({
   genButton,
   userId,
   manActivation,
-  activate
+  activate,
+  toActivationPage
 }: DisplayMessageProps): JSX.Element => {
   return (
     <VStack
@@ -116,6 +120,14 @@ const DisplayMessage = ({
           {regenButton && <RegenActivationTokenButton userId={userId} />}
           {genButton && <GenActivationTokenButton userId={userId} />}
           {manActivation && <ManualAccountActivationForm activate={activate} />}
+          {toActivationPage && (
+            <CustomButton
+              text="Activation page."
+              link="/auth/activate"
+              type="primary"
+              newTab={false}
+            />
+          )}
         </VStack>
       </VStack>
     </VStack>
