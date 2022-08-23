@@ -27,8 +27,9 @@ const UserProfile = (): JSX.Element => {
       <Title title="User Profile" />
       <ProfileHeader
         name={session.user.name}
-        email={session.user.email}
+        username={session.user.username}
         image={session.user.image}
+        bio={session.user.bio}
         loading={false}
       />
     </Box>

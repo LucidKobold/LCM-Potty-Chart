@@ -10,9 +10,10 @@ import React from "react";
 
 interface ProfileHeaderProps {
   name?: string;
-  email?: string;
+  username?: string;
   image?: string;
   loading: boolean;
+  bio?: string;
 }
 
 /**
@@ -27,9 +28,10 @@ interface ProfileHeaderProps {
 
 const ProfileHeader = ({
   name,
-  email,
+  username,
   image,
-  loading
+  loading,
+  bio
 }: ProfileHeaderProps): JSX.Element => {
   return loading ? (
     <VStack
@@ -114,13 +116,11 @@ const ProfileHeader = ({
             {name}
           </Heading>
           {/* Simulating a username. Update later to use the username stored within the database. */}
-          <Heading as="h2" size="md">{`@${email.split("@")[0]}`}</Heading>
+          <Heading as="h2" size="md">
+            {username}
+          </Heading>
         </VStack>
-        <Box>
-          {
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-          }
-        </Box>
+        <Box>{bio}</Box>
       </VStack>
     </VStack>
   );
