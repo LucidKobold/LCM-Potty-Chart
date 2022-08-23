@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import EmailProvider from "next-auth/providers/email";
 import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
+import editUserProfile from "../../../../lib/api/mutation/editUserProfile";
 
 const prisma = new PrismaClient();
 
@@ -79,8 +80,14 @@ export const authOptions: NextAuthOptions = {
     // async signIn(message) { /* on successful sign in */ },
     // async signOut(message) { /* on signout */ },
     async createUser(message) {
-      const { id } = message.user;
+      const { id, email, image, name } = message.user;
+      // * Generate activation token.
       genActivationToken(id);
+
+      // * Generate and set the username.
+      const username = email.split("@")[0];
+
+      editUserProfile({ userId: id, name, username, email, bio: "", image });
     }
     // async updateUser(message) { /* user updated - e.g. their email was verified */ },
     // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },
