@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { addDays } from "date-fns";
 import cuid from "cuid";
-import apolloClient from "../apollo";
+import apolloClient from "../../../apollo";
 
 const regenerateActivationToken = (userId: string): void => {
   const UPDATE_REGENERATEACTIVATIONTOKEN = gql`

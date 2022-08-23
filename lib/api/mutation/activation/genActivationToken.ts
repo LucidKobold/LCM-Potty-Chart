@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { addDays } from "date-fns";
-import apolloClient from "../apollo";
+import apolloClient from "../../../apollo";
 
 const genActivationToken = (userId: string): void => {
   const CREATE_GENVERIFICATIONTOKEN = gql`

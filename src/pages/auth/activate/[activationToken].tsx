@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Box } from "@chakra-ui/react";
 import Title from "../../../components/title";
-import fetchActivationStatus from "../../../../lib/activation/fetchActivationStatus";
+import fetchActivationStatus from "../../../../lib/api/query/fetchActivationStatus";
 import tokenReadyToActivate from "../../../../lib/activation/tokenReadyToActivate";
-import activateAccount from "../../../../lib/activation/activateAccount";
+import activateAccount from "../../../../lib/api/mutation/activation/activateAccount";
 import DisplayMessage from "../../../components/auth/DisplayMessage";
 
 interface Errors {

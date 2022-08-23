@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import EmailProvider from "next-auth/providers/email";
-import genActivationToken from "../../../../lib/activation/genActivationToken";
+import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
 
 const prisma = new PrismaClient();
 

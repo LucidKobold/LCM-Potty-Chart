@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Box } from "@chakra-ui/react";
 import ModifyAccount from "../../components/welcome/ModifyAccount";
-import fetchActivationStatus from "../../../lib/activation/fetchActivationStatus";
+import fetchActivationStatus from "../../../lib/api/query/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
 import DisplayMessage from "../../components/auth/DisplayMessage";
 import Title from "../../components/title";

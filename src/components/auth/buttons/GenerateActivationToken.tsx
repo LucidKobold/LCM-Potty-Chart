@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
-import genActivationToken from "../../../../lib/activation/genActivationToken";
+import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
 
 interface RegenActivationTokenButtonProps {
   userId: string;
