@@ -86,9 +86,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]!
-    getVerificationWithToken(activationToken: String!): ActivationToken!
-    getVerificationWithUserId(userId: String!): ActivationToken!
+    users: [User]
+    getVerificationWithToken(activationToken: String!): ActivationToken
+    getVerificationWithUserId(userId: String!): ActivationToken
   }
 
   type Mutation {
@@ -99,6 +99,14 @@ const typeDefs = gql`
       newToken: String!
     ): ActivationToken!
     activateAccount(activationToken: String!): ActivationToken!
+    updateAccountInfo(
+      userId: String!
+      name: String!
+      username: String!
+      bio: String!
+      email: String!
+      image: String!
+    ): User!
   }
 `;
 

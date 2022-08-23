@@ -63,7 +63,24 @@ const publicResolvers = {
         });
         sendWelcomeEmail(user.email, user.name);
       }
-    }
+    },
+    updateAccountInfo: async (
+      _parent,
+      { userId, name, username, bio, email, image },
+      ctx
+    ) =>
+      await ctx.prisma.user.update({
+        where: {
+          id: userId
+        },
+        data: {
+          name,
+          username,
+          bio,
+          email,
+          image
+        }
+      })
   },
   User: {
     accounts: async (parent, _args, ctx) =>
