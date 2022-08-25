@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Box } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import DisplayMessage from "../../components/auth/DisplayMessage";
 import Title from "../../components/title";
@@ -23,7 +23,14 @@ const UserProfile = (): JSX.Element => {
       <ProfileHeader loading={true} />
     </Box>
   ) : session ? (
-    <Box>
+    <VStack
+      my="10vh"
+      w="100%"
+      h="auto"
+      justifyContent="center"
+      alignContent="center"
+      spacing={4}
+    >
       <Title title="User Profile" />
       <ProfileHeader
         name={session.user.name}
@@ -32,7 +39,7 @@ const UserProfile = (): JSX.Element => {
         bio={session.user.bio}
         loading={false}
       />
-    </Box>
+    </VStack>
   ) : (
     <Box>
       <Title title="Redirecting..." />
