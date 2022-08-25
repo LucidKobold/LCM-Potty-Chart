@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Box } from "@chakra-ui/react";
-import ModifyAccount from "../../components/welcome/ModifyAccount";
+import ModifyAccount from "../../components/profile/ModifyAccount";
 import fetchActivationStatus from "../../../lib/api/query/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
 import DisplayMessage from "../../components/auth/DisplayMessage";
@@ -67,6 +67,7 @@ const NewUserPage = (): JSX.Element => {
       <Box>
         <Title title="Modify Your Account" />
         <ModifyAccount
+          userId={session.user.id}
           name={session.user.name}
           username={session.user.username}
           image={session.user.image}

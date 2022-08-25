@@ -6,18 +6,16 @@ interface EditUserProfileProps {
   name: string;
   username: string;
   bio: string;
-  email: string;
   image: string;
 }
 
-const editUserProfile = (newUserInfo: EditUserProfileProps): void => {
+const editUserProfile = (newUserInfo: EditUserProfileProps) => {
   const UPDATE_ACCOUNTINFO = gql`
     mutation UpdateAccountInfo(
       $userId: String!
       $name: String!
       $username: String!
       $bio: String!
-      $email: String!
       $image: String!
     ) {
       updateAccountInfo(
@@ -25,7 +23,6 @@ const editUserProfile = (newUserInfo: EditUserProfileProps): void => {
         name: $name
         username: $username
         bio: $bio
-        email: $email
         image: $image
       ) {
         id
@@ -41,7 +38,7 @@ const editUserProfile = (newUserInfo: EditUserProfileProps): void => {
     }
   `;
 
-  apolloClient.mutate({
+  return apolloClient.mutate({
     mutation: UPDATE_ACCOUNTINFO,
     variables: newUserInfo
   });

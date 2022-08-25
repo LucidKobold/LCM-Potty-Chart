@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -99,7 +100,7 @@ const ManualAccountActivationForm = ({
             height: "auto"
           }}
         >
-          <VStack h="auto" w="100%" spacing={6}>
+          <Box h="auto" w="100%">
             <Field name="token" validate={validateToken}>
               {({ field, form }: FieldProps) => (
                 <FormControl
@@ -154,7 +155,7 @@ const ManualAccountActivationForm = ({
                 </FormControl>
               )}
             </Field>
-            <VStack h="auto" w="100%" spacing={4}>
+            <Box h="auto" w="100%">
               <Button
                 type="submit"
                 variant="submit"
@@ -163,8 +164,8 @@ const ManualAccountActivationForm = ({
               >
                 {"Activate Your Account"}
               </Button>
-            </VStack>
-          </VStack>
+            </Box>
+          </Box>
         </Form>
       )}
     </Formik>

@@ -80,6 +80,7 @@ const Header = (): JSX.Element => {
           : "rgba(0, 134, 255, 0.9) 0px 0px 15px, rgba(0, 134, 255, 0.7) 0px 0px 3px 1px"
       }}
       h={open ? "125px" : "auto"}
+      as="header"
     >
       {/* Logo | Site Name */}
       <HStack

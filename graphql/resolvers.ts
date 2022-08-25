@@ -66,7 +66,7 @@ const publicResolvers = {
     },
     updateAccountInfo: async (
       _parent,
-      { userId, name, username, bio, email, image },
+      { userId, name, username, bio, image },
       ctx
     ) =>
       await ctx.prisma.user.update({
@@ -77,7 +77,6 @@ const publicResolvers = {
           name,
           username,
           bio,
-          email,
           image
         }
       })
