@@ -87,7 +87,7 @@ export const authOptions: NextAuthOptions = {
       // * Generate and set the username.
       const username = email.split("@")[0];
 
-      editUserProfile({ userId: id, name, username, email, bio: "", image });
+      editUserProfile({ userId: id, name, username, bio: "", image });
     }
     // async updateUser(message) { /* user updated - e.g. their email was verified */ },
     // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },
