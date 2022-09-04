@@ -1,13 +1,11 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
-import { PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
+import prisma from "../../../../lib/prisma";
 import EmailProvider from "next-auth/providers/email";
 import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
 import editUserProfile from "../../../../lib/api/mutation/editUserProfile";
-
-const prisma = new PrismaClient();
 
 // Environment
 const environment = process.env.NODE_ENV || "development";
