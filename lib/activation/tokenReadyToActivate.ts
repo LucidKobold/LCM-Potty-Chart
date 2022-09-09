@@ -9,6 +9,16 @@ interface Token {
   expires: Date;
 }
 
+/**
+ * Checks if the token is ready to be activated.
+ * @param sessionUserId the id of the user from the session.
+ * @param token the token that is linked to the userID, fetched by another function.
+ * @param requestedToken the token the user is trying to activate.
+ * @returns an object that will signify ig the token is ready and any errors with the
+ * token or request such as the user provided token not matching the one linked to their account,
+ * the token already being validate, and if the token can be regeared if it is expired.
+ */
+
 const tokenReadyToActivate = (
   sessionUserId: string,
   token: Token,
@@ -58,7 +68,7 @@ const tokenReadyToActivate = (
   // Check if the requested token is the same token provided.
   if (requestedToken !== tokenId) {
     errorMessage =
-      "An error occurred when fetching your activation status. Please try again. Contact support if this issue persists.";
+      "The token you are trying to activate doesn't belong to your account. Please check the provided token and try again. Contact support if this issue persists.";
     error = true;
   }
 
