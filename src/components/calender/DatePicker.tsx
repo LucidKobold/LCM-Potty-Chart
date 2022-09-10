@@ -257,9 +257,8 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
                             )}
                           </HStack>
                           <FormErrorMessage>
-                            {typeof form.errors.date === "string"
-                              ? form.errors.date
-                              : ""}
+                            {typeof form.errors.date === "string" &&
+                              form.errors.date}
                           </FormErrorMessage>
                         </VStack>
                       </FormControl>
