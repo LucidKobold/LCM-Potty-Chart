@@ -4,6 +4,10 @@
     <a href="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/njsscan-analysis.yml"><img alt="CodeQL Analysis" src="https://github.com/LucidCreationsMedia/LCM-Potty-Chart/actions/workflows/njsscan-analysis.yml/badge.svg?branch=main" /></a>
 </p>
 
+<p align="center">
+    <a href="https://ko-fi.com/L4L2F0JQA"><img alt="Ko-fi donation button" src="https://ko-fi.com/img/githubbutton_sm.svg" /></a>
+</p>
+
 # [LCM Potty Chart](https://lucidcreations.media/)
 
 ## About
