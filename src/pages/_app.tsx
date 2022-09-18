@@ -3,6 +3,7 @@ import { ApolloProvider } from "@apollo/client";
 import apolloClient from "../../lib/apollo";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import { Session } from "next-auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import AppTheme from "../theme/AppTheme";
 import { Provider } from "react-redux";
@@ -12,12 +13,14 @@ import Head from "next/head";
 
 function LCMPottyChart({
   Component,
-  pageProps: { session, ...pageProps }
-}: AppProps): JSX.Element {
+  pageProps
+}: AppProps<{
+  session: Session;
+}>): JSX.Element {
   return (
     <React.StrictMode>
       <ChakraProvider theme={AppTheme}>
-        <SessionProvider session={session}>
+        <SessionProvider session={pageProps.session}>
           <ApolloProvider client={apolloClient}>
             <Layout {...pageProps}>
               <Head>
