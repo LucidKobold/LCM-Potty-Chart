@@ -2,7 +2,11 @@
   "private": true,
   "name": "lucid-creations-media-potty-chart",
   "homepage": "https://lucidcreations.media/introducing-code-name-potty-chart/",
+<<<<<<< HEAD
   "version": "0.2.0",
+=======
+  "version": "0.1.5",
+>>>>>>> main
   "author": {
     "name": "Lucid Creations Media",
     "url": "https://lucidcreations.media",
@@ -39,15 +43,23 @@
     "nodemailer": "^6.7.8",
     "@iconify/react": "^3.2.2",
     "@reduxjs/toolkit": "^1.8.5",
+<<<<<<< HEAD
     "date-fns": "^2.29.2",
     "framer-motion": "^7.2.1",
     "next": "12.2.5",
+=======
+    "date-fns": "^2.29.3",
+    "formik": "^2.2.9",
+    "framer-motion": "^7.3.5",
+    "next": "12.3.0",
+>>>>>>> main
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "sharp": "^0.30.7"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@iconify/react": "^3.2.2",
     "@types/node": "^18.7.14",
     "@types/react": "^18.0.18",
@@ -55,6 +67,14 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "eslint": "^8.23.0",
     "eslint-config-next": "^12.2.5",
+=======
+    "@types/node": "^18.7.18",
+    "@types/react": "^18.0.20",
+    "@types/react-redux": "^7.1.24",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-next": "^12.3.0",
+>>>>>>> main
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.1",
