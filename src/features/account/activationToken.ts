@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import tokenReadyToActivate from "../../../lib/activation/tokenReadyToActivate";
-import fetchActivationStatus from "../../../lib/api/query/fetchActivationStatus";
 
 interface AccountActivationToken {
   id: string;
@@ -11,85 +9,103 @@ interface AccountActivationToken {
   expires: Date;
 }
 
-interface ActivationTokenSlice {
-  token: AccountActivationToken;
-  fetching: boolean;
-  fetchingErrors: {
-    error: boolean;
-    errorMessage: string;
-    needsGen: true;
-  };
-  activatingToken: boolean;
-  activatingErrors: {
-    error: boolean;
-    errorMessage: string;
-    canRegn: boolean;
-  };
-  regeneratingToken: boolean;
-  regenErrors: {
-    error: boolean;
-    errorMessage: string;
-  };
+type ApiStatus = "idle" | "loading" | "succeeded" | "failed";
+
+interface Errors {
+  message: string;
+  canRegen?: boolean;
+  needsGen?: boolean;
 }
 
-const initialState: ActivationTokenSlice = {} as ActivationTokenSlice;
+interface ApiInfo {
+  status: ApiStatus;
+  errors: Errors | null;
+}
+
+interface ActivationTokenSlice {
+  token: {
+    info: AccountActivationToken | null;
+    status: ApiStatus;
+    errors: Errors | null;
+  };
+  activating: ApiInfo;
+  regen: ApiInfo;
+}
+
+const initialState: ActivationTokenSlice = {
+  token: {
+    info: null,
+    status: "idle",
+    errors: null
+  },
+  activating: {
+    status: "idle",
+    errors: null
+  },
+  regen: {
+    status: "idle",
+    errors: null
+  }
+};
+
+interface SetApiStatusPayload {
+  api: "token" | "activating" | "regen";
+  status: ApiStatus;
+}
+
+interface SetApiErrorsPayload extends SetApiStatusPayload {
+  errors: Errors;
+}
 
 const accountActivationStatusSlice = createSlice({
   name: "Activation Token",
   initialState,
   reducers: {
-    fetchToken(state: ActivationTokenSlice, actions: PayloadAction<string>) {
-      state.fetching = true;
+    setApiStatus(
+      state: ActivationTokenSlice,
+      action: PayloadAction<SetApiStatusPayload>
+    ) {
+      const { status, api } = action.payload;
 
-      const id = actions.payload;
-
-      fetchActivationStatus
-        .withUserId(id)
-        .then((res) => {
-          const token: AccountActivationToken =
-            res.data.getVerificationWithUserId;
-
-          state.token = token;
-
-          state.fetching = false;
-        })
-        .catch((err) => {
-          state.fetching = false;
-          state.fetchingErrors.error = true;
-          state.fetchingErrors.errorMessage = err;
-          console.error(err);
-        });
+      state[`${api}`].status = status;
     },
-    activateToken(state: ActivationTokenSlice, actions: PayloadAction<string>) {
-      const { userId, providedToken } = JSON.parse(actions.payload);
+    setApiErrors(
+      state: ActivationTokenSlice,
+      action: PayloadAction<SetApiErrorsPayload>
+    ) {
+      const { api, errors, status } = action.payload;
 
-      if (state.token.id !== "") {
-        state.activatingToken = true;
-
-        const status = tokenReadyToActivate(userId, state.token, providedToken);
-
-        if (status.ready) {
-          // TODO: Activate token here.
-          state.activatingToken = false;
-        } else if (!status.ready && status.error.validated) {
-          state.activatingToken = false;
-        } else {
-          state.activatingToken = false;
-          state.activatingErrors.error = status.error.error;
-          state.activatingErrors.errorMessage = status.error.errorMessage;
-          state.activatingErrors.canRegn = status.error.needRegenerate;
-        }
-      }
+      state[`${api}`].status = status;
+      state[`${api}`].errors = errors;
     },
-    regenToken(state: ActivationTokenSlice, actions: PayloadAction<string>) {
-      //
+    setActivationToken(
+      state: ActivationTokenSlice,
+      action: PayloadAction<AccountActivationToken>
+    ) {
+      const { payload } = action;
+
+      state.token.info = payload;
     },
-    genToken(state: ActivationTokenSlice, actions: PayloadAction<string>) {
-      //
+    reset(state: ActivationTokenSlice) {
+      state.token = {
+        info: null,
+        status: "idle",
+        errors: null
+      };
+
+      state.activating = {
+        status: "idle",
+        errors: null
+      };
+
+      state.regen = {
+        status: "idle",
+        errors: null
+      };
     }
   }
 });
 
-export const { fetchToken, activateToken, regenToken, genToken } =
+export const { setApiStatus, setApiErrors, setActivationToken, reset } =
   accountActivationStatusSlice.actions;
 export default accountActivationStatusSlice.reducer;
