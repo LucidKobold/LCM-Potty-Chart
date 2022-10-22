@@ -64,9 +64,13 @@ export const authOptions: NextAuthOptions = {
       session.user.role = user.role;
       session.user.id = user.id;
       session.user.username =
-        user.username && typeof user.username === "string" ? user.username : "";
+        session.user.username && typeof session.user.username === "string"
+          ? session.user.username
+          : "";
       session.user.bio =
-        user.bio && typeof user.bio === "string" ? user.bio : "";
+        session.user.bio && typeof session.user.bio === "string"
+          ? session.user.bio
+          : "";
 
       return session;
     }
