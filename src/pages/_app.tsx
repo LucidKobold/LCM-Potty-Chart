@@ -7,7 +7,7 @@ import { Session } from "next-auth";
 import { ChakraProvider } from "@chakra-ui/react";
 import AppTheme from "../theme/AppTheme";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
+import { store } from "../redux/store";
 import Layout from "../theme/layout/Layout";
 import Head from "next/head";
 
