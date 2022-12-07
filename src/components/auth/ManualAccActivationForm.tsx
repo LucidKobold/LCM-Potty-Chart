@@ -136,13 +136,13 @@ const ManualAccountActivationForm = ({
                         isDisabled={form.isSubmitting}
                         {...(!form.errors.token && form.touched.token
                           ? {
+                            borderColor: "brand.valid",
+                            boxShadow: "0 0 0 1px #00c17c",
+                            _hover: {
                               borderColor: "brand.valid",
-                              boxShadow: "0 0 0 1px #00c17c",
-                              _hover: {
-                                borderColor: "brand.valid",
-                                boxShadow: "0 0 0 1px #00c17c"
-                              }
+                              boxShadow: "0 0 0 1px #00c17c"
                             }
+                          }
                           : "")}
                       />
                       <FormErrorMessage>
@@ -155,7 +155,7 @@ const ManualAccountActivationForm = ({
                 </FormControl>
               )}
             </Field>
-            <Box h="auto" w="100%">
+            <VStack h="auto" w="100%" justifyContent="center" alignContent="center">
               <Button
                 type="submit"
                 variant="submit"
@@ -164,7 +164,15 @@ const ManualAccountActivationForm = ({
               >
                 {"Activate Your Account"}
               </Button>
-            </Box>
+              <Button
+                type="button"
+                variant="submit"
+                isLoading={props.isSubmitting}
+                onClick={() => {}}
+              >
+                {"Resend Activation Key"}
+              </Button>
+            </VStack>
           </Box>
         </Form>
       )}
