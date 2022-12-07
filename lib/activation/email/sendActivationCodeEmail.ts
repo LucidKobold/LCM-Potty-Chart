@@ -29,12 +29,13 @@ const sendActivationCodeEmail = (
     subject: `Hello ${name}, please activate your account for LCM Potty Chart with the lint provided.`,
     html: `
     <div>
-      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate/${activationCode}">Activate your account.</a></p>
       <p>You are receiving this email because your email was used to register an account within the app.</p>
       <p>If you did not try to register an account please disregard this email and your account will be deleted within a few days.</p>
       <div>
+      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate/${activationCode}">Activate your account</a>.</p>
+      <p></p>
       <p>If you are have access with the link above try to manually activate your account with the following link:</P
-      <p><a><a href="${process.env.NEXTAUTH_URL}/auth/activate">Manual activation (https://${process.env.NEXTAUTH_URL}/auth/activate)</a></a></p>
+      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate">Manual activation (https://${process.env.NEXTAUTH_URL}/auth/activate)</a></p>
       <p>Activation code:</p>
       <p><strong>${activationCode}</strong></p>
       </div>
