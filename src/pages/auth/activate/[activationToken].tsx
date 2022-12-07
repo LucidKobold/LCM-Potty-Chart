@@ -8,8 +8,6 @@ import tokenReadyToActivate from "../../../../lib/activation/tokenReadyToActivat
 import activateAccount from "../../../../lib/api/mutation/activation/activateAccount";
 import DisplayMessage from "../../../components/auth/DisplayMessage";
 
-// TODO: Check if the account is activated. Take them to the welcome page if it is. Add the resent activation token button. Align the buttons properly.
-
 interface Errors {
   error: boolean;
   errorMessage: string;
@@ -26,6 +24,7 @@ const ActivateAccount = (): JSX.Element => {
   const [errors, setErrors] = useState<Errors>({} as Errors);
 
   useEffect(() => {
+    // Add the slice functions here.
     if (!session && status !== "loading") {
       router.push("/auth/signin");
     }

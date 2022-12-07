@@ -15,6 +15,8 @@ interface Errors {
   needRegenerate: boolean;
 }
 
+// TODO: Check if the account is activated. Take them to the welcome page if it is. Add the resend activation token button. Align the buttons properly.
+
 const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
 
@@ -29,6 +31,7 @@ const ActivateAccount = (): JSX.Element => {
   }, [router, session, status]);
 
   const handleManualActivation = (activationToken: string): void => {
+    // Add the slice functions in here.
     if (session) {
       fetchActivationStatus
         .withToken(activationToken)
@@ -65,6 +68,14 @@ const ActivateAccount = (): JSX.Element => {
         });
     }
   };
+
+  const handleResendActivationTokenEmail = (): void => {
+    // Fetch the user's activation token.
+    // Check that it is valid.
+    // If valid then resend the email.
+    // If invalid show an error, disable the resend key button, and show the regenerate key button.
+    return;
+  }
 
   return session ? (
     errors.error ? (
