@@ -3,7 +3,6 @@ import { Box, HStack, VStack } from "@chakra-ui/react";
 import CustomButton from "./Custom";
 import links, { LinkObj } from "./data/links";
 import KoFi from "./KoFi";
-import Twitter from "./Twitter";
 
 /**
  * Displays buttons about the app such as links to Patreon, development roadmap,
@@ -39,10 +38,6 @@ const Buttons = (): JSX.Element => {
           if (type === "ko-fi") {
             return <KoFi key={type} />;
           }
-
-          if (type === "twitter") {
-            return <Twitter key={type} />;
-          }
         })}
       </HStack>
       <VStack
@@ -70,10 +65,6 @@ const Buttons = (): JSX.Element => {
 
           if (type === "ko-fi") {
             return <KoFi key={type} />;
-          }
-
-          if (type === "twitter") {
-            return <Twitter key={type} />;
           }
         })}
       </VStack>
