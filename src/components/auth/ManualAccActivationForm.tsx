@@ -155,7 +155,12 @@ const ManualAccountActivationForm = ({
                 </FormControl>
               )}
             </Field>
-            <VStack h="auto" w="100%" justifyContent="center" alignContent="center">
+            <VStack
+              h="auto"
+              w="100%"
+              justifyContent="center"
+              alignContent="center"
+            >
               <Button
                 type="submit"
                 variant="submit"
@@ -164,14 +169,14 @@ const ManualAccountActivationForm = ({
               >
                 {"Activate Your Account"}
               </Button>
-              <Button
+              {/* <Button
                 type="button"
                 variant="submit"
                 isLoading={props.isSubmitting}
                 onClick={() => {}}
               >
                 {"Resend Activation Key"}
-              </Button>
+              </Button> */}
             </VStack>
           </Box>
         </Form>

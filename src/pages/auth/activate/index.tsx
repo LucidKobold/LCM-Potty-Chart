@@ -75,7 +75,7 @@ const ActivateAccount = (): JSX.Element => {
     // If valid then resend the email.
     // If invalid show an error, disable the resend key button, and show the regenerate key button.
     return;
-  }
+  };
 
   return session ? (
     errors.error ? (

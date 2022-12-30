@@ -7,6 +7,10 @@ import EmailProvider from "next-auth/providers/email";
 import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
 import editUserProfile from "../../../../lib/api/mutation/editUserProfile";
 
+// TODO: On signin check if the account is activated using one of the Redux helper functions.
+// * If not take the user to the activation page.
+// * If the user has not edited their profile since activation take them to the welcome page.
+
 // Environment
 const environment = process.env.NODE_ENV || "development";
 
