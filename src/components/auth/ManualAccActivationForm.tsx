@@ -136,13 +136,13 @@ const ManualAccountActivationForm = ({
                         isDisabled={form.isSubmitting}
                         {...(!form.errors.token && form.touched.token
                           ? {
-                            borderColor: "brand.valid",
-                            boxShadow: "0 0 0 1px #00c17c",
-                            _hover: {
                               borderColor: "brand.valid",
-                              boxShadow: "0 0 0 1px #00c17c"
+                              boxShadow: "0 0 0 1px #00c17c",
+                              _hover: {
+                                borderColor: "brand.valid",
+                                boxShadow: "0 0 0 1px #00c17c"
+                              }
                             }
-                          }
                           : "")}
                       />
                       <FormErrorMessage>
