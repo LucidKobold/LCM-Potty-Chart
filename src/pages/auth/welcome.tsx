@@ -81,7 +81,9 @@ const NewUserPage = (): JSX.Element => {
           message={tokenStatus.message}
           error
           toActivationPage={
-            tokenStatus.message.split("Account not activated").length || tokenStatus.message.split("Your activation status is not valid").length > 1
+            tokenStatus.message.split("Account not activated").length ||
+            tokenStatus.message.split("Your activation status is not valid")
+              .length > 1
               ? true
               : false
           }

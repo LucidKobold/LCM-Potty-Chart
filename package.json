@@ -10,15 +10,14 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "npm run gen && npm run db-sync && next build",
+    "build": "yarn gen && yarn db-sync && next build",
     "start": "next start",
     "lint": "next lint",
     "pretty": "prettier --write .",
     "db-sync": "npx prisma db push",
     "db-migrate": "npx prisma migrate dev",
     "db-reset": "npx prisma migrate reset",
-    "gen": "prisma generate",
-    "up": "ncu -u && npm up && npm install"
+    "gen": "prisma generate"
   },
   "dependencies": {
     "@apollo/client": "^3.7.4",
