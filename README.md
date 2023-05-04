@@ -98,6 +98,28 @@ Copy the files and remove the `example.` prefix to use them.
 - .env
 
 ```env
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+# This is for local/dev. Make sure to update ./prisma/schema.prisma to use the dev config.
+DATABASE_URL="postgresql://postgres:randompassword@localhost:5432/dbname?schema=public"
+
+# These are values from Vercel. Make sure to update ./prisma/schema.prisma to use the vercel config.
+POSTGRES_DATABASE="dbname"
+POSTGRES_PASSWORD="randompassword"
+POSTGRES_HOST="region.postgres.vercel-storage.com"
+POSTGRES_USER="postgres"
+POSTGRES_PRISMA_URL="postgres://postgres:randompassword@region.postgres.vercel-storage.com/dbname?pgbouncer=true&connect_timeout=15"
+POSTGRES_URL_NON_POOLING="postgres://postgres:randompassword@region.postgres.vercel-storage.com/dbname"
+POSTGRES_URL="postgres://postgres:randompassword@region.postgres.vercel-storage.com/dbname"
+```
+
+- .env.local
+
+```env
 # This section is only applicable during the beta and will be removed when the app is completed.
 NEXT_PUBLIC_APP_VERSION="0.2.0"
 # Beta version info
@@ -125,26 +147,8 @@ GOOGLE_SECRET=""
 - .env.development
 
 ```env
-DATABASE_URL="postgresql://postgres:randompassword@localhost:5432/dbname?schema=public"
 
 ```
-
-This would be used for your local db/dev. Make sure to update `./prisma/schema.prisma` to use the dev config.
-
-- .env.production
-
-```env
-POSTGRES_DATABASE="dbname"
-POSTGRES_PASSWORD="randompassword"
-POSTGRES_HOST="region.postgres.vercel-storage.com"
-POSTGRES_USER="postgres"
-POSTGRES_PRISMA_URL="postgres://postgres:randompassword@region.postgres.vercel-storage.com/dbname?pgbouncer=true&connect_timeout=15"
-POSTGRES_URL_NON_POOLING="postgres://postgres:randompassword@region.postgres.vercel-storage.com/dbname"
-POSTGRES_URL="postgres://postgres:randompassword@region.postgres.vercel-storage.com/dbname"
-
-```
-
-These are values from Vercel. Make sure to update `./prisma/schema.prisma` to use the vercel config.
 
 ## Development Server
 
