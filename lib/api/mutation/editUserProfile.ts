@@ -6,7 +6,6 @@ interface EditUserProfileProps {
   name: string;
   username: string;
   bio: string;
-  image: string;
 }
 
 const editUserProfile = (newUserInfo: EditUserProfileProps) => {
@@ -16,14 +15,12 @@ const editUserProfile = (newUserInfo: EditUserProfileProps) => {
       $name: String!
       $username: String!
       $bio: String!
-      $image: String!
     ) {
       updateAccountInfo(
         userId: $userId
         name: $name
         username: $username
         bio: $bio
-        image: $image
       ) {
         id
         name
@@ -31,7 +28,6 @@ const editUserProfile = (newUserInfo: EditUserProfileProps) => {
         bio
         role
         email
-        image
         createdAt
         updatedAt
       }

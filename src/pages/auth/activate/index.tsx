@@ -69,13 +69,13 @@ const ActivateAccount = (): JSX.Element => {
     }
   };
 
-  const handleResendActivationTokenEmail = (): void => {
-    // Fetch the user's activation token.
-    // Check that it is valid.
-    // If valid then resend the email.
-    // If invalid show an error, disable the resend key button, and show the regenerate key button.
-    return;
-  };
+  // const handleResendActivationTokenEmail = (): void => {
+  //   // Fetch the user's activation token.
+  //   // Check that it is valid.
+  //   // If valid then resend the email.
+  //   // If invalid show an error, disable the resend key button, and show the regenerate key button.
+  //   return;
+  // };
 
   return session ? (
     errors.error ? (

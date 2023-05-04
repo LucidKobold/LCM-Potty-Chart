@@ -8,7 +8,6 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  Avatar,
   Button,
   Popover,
   PopoverTrigger,

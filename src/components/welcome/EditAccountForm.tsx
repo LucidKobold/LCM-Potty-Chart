@@ -12,13 +12,11 @@ import {
 import { Formik, Form, Field, FieldProps } from "formik";
 import React, { useEffect, useState } from "react";
 import editUserProfile from "../../../lib/api/mutation/editUserProfile";
-import ImageUploadModal from "../profile/ImageUploadModal";
 
 interface EditAccountProps {
   userId: string;
   name?: string;
   username?: string;
-  image?: string;
   bio?: string;
   loading: boolean;
 }
@@ -28,7 +26,6 @@ interface EditAccountProps {
  * @param {string} userId the user id from the session.
  * @param {string} name the user's name from the session.
  * @param {string} username the username id from the session.
- * @param {string} image the user's image id from the session.
  * @param {string} bio the user's bio from the session.
  * @param {boolean} loading is tha data being fetched from the session?
  */
@@ -37,10 +34,9 @@ const EditAccountForm = ({
   userId,
   name,
   username,
-  image,
-  bio,
-  loading
-}: EditAccountProps): JSX.Element => {
+  bio
+}: // loading
+EditAccountProps): JSX.Element => {
   // Form field valid statuses.
   const [validName, setValidName] = useState<boolean>(false);
   const [validUsername, setValidUsername] = useState<boolean>(false);
@@ -110,8 +106,6 @@ const EditAccountForm = ({
     }
   }, [validBio, validName, validUsername]);
 
-  const [newImage, setNewImage] = useState<string>(image);
-
   // Field theme
   const fieldTheme = {
     width: "100%",
@@ -133,11 +127,10 @@ const EditAccountForm = ({
     name: string;
     username: string;
     bio: string;
-    image: string;
   }
 
-  const submitChanges = ({ name, username, bio, image }: NewProfileInfo) =>
-    editUserProfile({ userId, name, username, bio, image });
+  const submitChanges = ({ name, username, bio }: NewProfileInfo) =>
+    editUserProfile({ userId, name, username, bio });
 
   // ! Add a "preview changes" button that doesn't submit the changes.
   // ! Add a "reset preview" button that changes the profile header back to values form the session.
@@ -148,11 +141,10 @@ const EditAccountForm = ({
         userId,
         name,
         username,
-        image,
         bio
       }}
       onSubmit={(values, actions) => {
-        submitChanges({ ...values, image: newImage })
+        submitChanges({ ...values })
           .then(() => {
             actions.setSubmitting(false);
             actions.resetForm();
@@ -178,15 +170,6 @@ const EditAccountForm = ({
             spacing={6}
           >
             <Heading as="h1">{"Edit your profile"}</Heading>
-            <ImageUploadModal
-              name={name}
-              image={image}
-              loading={loading}
-              isSubmitting={props.isSubmitting}
-              formInvalid={validForm}
-              newImage={newImage}
-              setNewImage={setNewImage}
-            />
             <Field name="name" validate={validateName}>
               {({ field, form }: FieldProps) => (
                 <FormControl
