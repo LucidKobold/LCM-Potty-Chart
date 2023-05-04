@@ -1,8 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
-import TwitterProvider from "next-auth/providers/twitter";
-import prisma from "../../../../lib/prisma";
+import { prisma } from "../../../../lib/prisma";
 import EmailProvider from "next-auth/providers/email";
 import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
 import editUserProfile from "../../../../lib/api/mutation/editUserProfile";
@@ -71,6 +70,8 @@ export const authOptions: NextAuthOptions = {
           ? session.user.bio
           : "";
 
+      delete session.user.image;
+
       return session;
     }
     // async jwt({ token, user, account, profile, isNewUser }) {
@@ -81,14 +82,14 @@ export const authOptions: NextAuthOptions = {
     // async signIn(message) { /* on successful sign in */ },
     // async signOut(message) { /* on signout */ },
     async createUser(message) {
-      const { id, email, image, name } = message.user;
+      const { id, email, name } = message.user;
       // * Generate activation token.
       genActivationToken(id);
 
       // * Generate and set the username.
       const username = email.split("@")[0];
 
-      editUserProfile({ userId: id, name, username, bio: "", image });
+      editUserProfile({ userId: id, name, username, bio: "" });
     }
     // async updateUser(message) { /* user updated - e.g. their email was verified */ },
     // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },

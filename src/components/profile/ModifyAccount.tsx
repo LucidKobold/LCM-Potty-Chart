@@ -7,7 +7,6 @@ interface ModifyAccountProps {
   userId: string;
   name?: string;
   username?: string;
-  image?: string;
   bio?: string;
 }
 
@@ -17,7 +16,6 @@ interface ModifyAccountProps {
  * @param {string} userId the user id from the session.
  * @param {string} name the user's name from the session.
  * @param {string} username the username id from the session.
- * @param {string} image the user's image id from the session.
  * @param {string} bio the user's bio from the session.
  */
 
@@ -25,7 +23,6 @@ const ModifyAccount = ({
   userId,
   name,
   username,
-  image,
   bio
 }: ModifyAccountProps): JSX.Element => {
   return (
@@ -37,18 +34,11 @@ const ModifyAccount = ({
       alignContent="center"
       spacing={4}
     >
-      <ProfileHeader
-        name={name}
-        username={username}
-        image={image}
-        bio={bio}
-        loading={false}
-      />
+      <ProfileHeader name={name} bio={bio} loading={false} />
       <EditAccountForm
         userId={userId}
         name={name}
         username={username}
-        image={image}
         bio={bio}
         loading={false}
       />

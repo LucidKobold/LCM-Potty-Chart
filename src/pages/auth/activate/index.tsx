@@ -79,34 +79,25 @@ const ActivateAccount = (): JSX.Element => {
 
   return session ? (
     errors.error ? (
-      errors.needRegenerate ? (
-        <Box>
-          <Title title="Error" />
-          <DisplayMessage
-            message={errors.errorMessage}
-            error
-            regenButton
-            userId={session.user.id}
-          />
-        </Box>
-      ) : (
-        <Box>
-          <Title title="Error" />
-          <DisplayMessage
-            message={errors.errorMessage}
-            error
-            manActivation
-            activate={handleManualActivation}
-          />
-        </Box>
-      )
+      <Box>
+        <Title title="Error" />
+        <DisplayMessage
+          message={errors.errorMessage}
+          error
+          regenButton
+          userId={session.user.id}
+        />
+      </Box>
     ) : (
       <Box>
         <Title title="Enter Activation Token" />
         <DisplayMessage
           message="Please enter your activation token"
           manActivation
+          regenButton={true}
+          genButton={true}
           activate={handleManualActivation}
+          userId={session.user.id}
         />
       </Box>
     )

@@ -99,7 +99,13 @@ const ManualAccountActivationForm = ({
             height: "auto"
           }}
         >
-          <Box h="auto" w="100%">
+          <VStack
+            h="auto"
+            w="100%"
+            spacing={4}
+            justifyContent="center"
+            alignItems="flex-start"
+          >
             <Field name="token" validate={validateToken}>
               {({ field, form }: FieldProps) => (
                 <FormControl
@@ -177,7 +183,7 @@ const ManualAccountActivationForm = ({
                 {"Resend Activation Key"}
               </Button> */}
             </VStack>
-          </Box>
+          </VStack>
         </Form>
       )}
     </Formik>

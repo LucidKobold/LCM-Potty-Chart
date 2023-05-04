@@ -190,12 +190,13 @@ const Header = (): JSX.Element => {
                 {session ? (
                   status === "loading" ? (
                     <SkeletonCircle size="1.5rem" />
-                  ) : session.user.image ? (
-                    <Avatar
-                      name={session.user.name}
-                      size="sm"
-                      src={session.user.image}
-                    />
+                  ) : session.user ? (
+                    <Text fontSize="2rem">
+                      <Icon
+                        icon="carbon:user-avatar-filled"
+                        color="lightgreen"
+                      />
+                    </Text>
                   ) : (
                     <Text fontSize="2rem">
                       <Icon icon="carbon:user-avatar-filled-alt" />

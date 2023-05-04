@@ -18,13 +18,11 @@ const genActivationToken = (userId: string): void => {
     }
   `;
 
-  const expDate: Date = addDays(new Date(), 1);
-
   apolloClient.mutate({
     mutation: CREATE_GENVERIFICATIONTOKEN,
     variables: {
       userId: userId,
-      expires: expDate
+      expires: addDays(new Date(), 1)
     }
   });
 };

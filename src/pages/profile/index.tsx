@@ -35,7 +35,6 @@ const UserProfile = (): JSX.Element => {
       <ProfileHeader
         name={session.user.name}
         username={session.user.username}
-        image={session.user.image}
         bio={session.user.bio}
         loading={false}
       />

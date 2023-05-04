@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-micro";
+import { gql } from "@apollo/client";
 import apolloClient from "../../../apollo";
 
 const activateAccount = (activationToken: string): void => {

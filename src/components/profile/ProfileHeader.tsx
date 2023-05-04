@@ -1,17 +1,17 @@
 import {
   VStack,
-  Avatar,
+  Text,
   Heading,
   Box,
   Skeleton,
   SkeletonCircle
 } from "@chakra-ui/react";
+import { Icon } from "@iconify/react";
 import React from "react";
 
 interface ProfileHeaderProps {
   name?: string;
   username?: string;
-  image?: string;
   bio?: string;
   loading: boolean;
 }
@@ -20,7 +20,6 @@ interface ProfileHeaderProps {
  * Profile info to be displayed on a user's profile page.
  * @param {string} name name of the user.
  * @param {string} username username of the user.
- * @param {string} image image url of the user.
  * @param {string} bio bio of the user.
  * @param {string} loading is the user data being fetched from the session
  * or database?
@@ -29,7 +28,6 @@ interface ProfileHeaderProps {
 const ProfileHeader = ({
   name,
   username,
-  image,
   bio,
   loading
 }: ProfileHeaderProps): JSX.Element => {
@@ -89,7 +87,9 @@ const ProfileHeader = ({
       justifyContent="flex-start"
       alignContent="center"
     >
-      <Avatar name={name} size="xl" src={image} />
+      <Text fontSize="6.25rem">
+        <Icon icon="carbon:user-avatar-filled" color="lightgreen" />
+      </Text>
       <VStack
         w="fit-content"
         h="auto"

@@ -61,6 +61,7 @@ const NewUserPage = (): JSX.Element => {
           userId={session.user.id}
           genButton
           error
+          toActivationPage
         />
       </Box>
     ) : tokenStatus.status ? (
@@ -70,7 +71,6 @@ const NewUserPage = (): JSX.Element => {
           userId={session.user.id}
           name={session.user.name}
           username={session.user.username}
-          image={session.user.image}
           bio={session.user.bio}
         />
       </Box>
@@ -81,7 +81,7 @@ const NewUserPage = (): JSX.Element => {
           message={tokenStatus.message}
           error
           toActivationPage={
-            tokenStatus.message.split("Account not activated").length > 1
+            tokenStatus.message.split("Account not activated").length || tokenStatus.message.split("Your activation status is not valid").length > 1
               ? true
               : false
           }

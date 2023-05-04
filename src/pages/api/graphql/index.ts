@@ -1,26 +1,25 @@
 // import { unstable_getServerSession } from "next-auth";
 // import { authOptions } from "../auth/[...nextauth]";
-import { ApolloServer } from "apollo-server-micro";
+import { ApolloServer } from "@apollo/server";
+import { startServerAndCreateNextHandler } from "@as-integrations/next";
+import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../../../lib/prisma";
 import typeDefs, { DateTime } from "../../../../graphql/schema";
 import resolvers from "../../../../graphql/resolvers";
-import context from "../../../../graphql/context";
-import Cors from "micro-cors";
 
-const cors = Cors();
+export type Context = {
+  prisma: PrismaClient;
+};
 
-const apolloServer = new ApolloServer({
-  typeDefs: typeDefs,
+const apolloServer = new ApolloServer<Context>({
+  typeDefs,
   resolvers: {
     Date: DateTime,
     ...resolvers
   },
-  introspection: process.env.NODE_ENV !== "production",
-  context: context,
   csrfPrevention: true,
   cache: "bounded"
 });
-
-const startServer = apolloServer.start();
 
 // * Secured route that makes sure a user is logged in. Re-enable for final production.
 // export default cors(async function handler(req, res) {
@@ -46,20 +45,6 @@ const startServer = apolloServer.start();
 //   }
 // });
 
-export default cors(async function handler(req, res) {
-  if (req.method === "OPTIONS") {
-    res.end();
-    return false;
-  }
-  await startServer;
-
-  await apolloServer.createHandler({
-    path: "/api/graphql"
-  })(req, res);
+export default startServerAndCreateNextHandler(apolloServer, {
+  context: async (req, res) => ({ req, res, prisma })
 });
-
-export const config = {
-  api: {
-    bodyParser: false
-  }
-};

@@ -134,13 +134,13 @@ const EmailForm = ({ provider, id, signIn }: EmailFormProps): JSX.Element => {
                         isDisabled={form.isSubmitting}
                         {...(!form.errors.email && form.touched.email
                           ? {
-                            borderColor: "brand.valid",
-                            boxShadow: "0 0 0 1px #00c17c",
-                            _hover: {
                               borderColor: "brand.valid",
-                              boxShadow: "0 0 0 1px #00c17c"
+                              boxShadow: "0 0 0 1px #00c17c",
+                              _hover: {
+                                borderColor: "brand.valid",
+                                boxShadow: "0 0 0 1px #00c17c"
+                              }
                             }
-                          }
                           : "")}
                       />
                       <FormErrorMessage>

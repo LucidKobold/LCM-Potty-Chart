@@ -27,13 +27,11 @@ const regenerateActivationToken = (userId: string): void => {
     }
   `;
 
-  const expDate: Date = addDays(new Date(), 1);
-
   apolloClient.mutate({
     mutation: UPDATE_REGENERATEACTIVATIONTOKEN,
     variables: {
       userId: userId,
-      expires: expDate,
+      expires: addDays(new Date(), 1),
       newToken: cuid()
     }
   });

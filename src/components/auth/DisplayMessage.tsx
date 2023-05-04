@@ -117,12 +117,12 @@ const DisplayMessage = ({
               {message}
             </Text>
           </HStack>
+          {manActivation && <ManualAccountActivationForm activate={activate} />}
           {regenButton && <RegenActivationTokenButton userId={userId} />}
           {genButton && <GenActivationTokenButton userId={userId} />}
-          {manActivation && <ManualAccountActivationForm activate={activate} />}
           {toActivationPage && (
             <CustomButton
-              text="Activation page."
+              text="To Activation Page"
               link="/auth/activate"
               type="primary"
               newTab={false}

@@ -26,6 +26,8 @@ const publicResolvers = {
       if (newToken.token) {
         sendActivationCodeEmail(newToken.token, user.email, user.name);
       }
+
+      return await newToken;
     },
     regenerateActivationToken: async (
       _parent,
@@ -43,8 +45,9 @@ const publicResolvers = {
 
       if (updatedToken.token) {
         sendActivationCodeEmail(updatedToken.token, user.email, user.name);
-        return updatedToken;
       }
+
+      return await updatedToken;
     },
     activateAccount: async (_parent, { activationToken }, ctx) => {
       const activatedToken = await ctx.prisma.activationToken.update({
@@ -63,6 +66,8 @@ const publicResolvers = {
         });
         sendWelcomeEmail(user.email, user.name);
       }
+
+      return await activatedToken;
     },
     updateAccountInfo: async (
       _parent,
