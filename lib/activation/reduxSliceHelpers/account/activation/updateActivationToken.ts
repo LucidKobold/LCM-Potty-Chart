@@ -1,10 +1,10 @@
 // TODO: Invoke the appropriate api mutation for each function. Update the Redux states for each step of the function.
 
 const updateActivationToken = {
-  activate: (userId: string) => {
+  activate: (/*userId: string*/) => {
     return;
   },
-  regen: (userId: string) => {
+  regen: (/*userId: string*/) => {
     return;
   }
 };
