@@ -7,6 +7,7 @@ import KoFi from "./KoFi";
 /**
  * Displays buttons about the app such as links to Patreon, development roadmap,
  * Twitter, etc.
+ * @returns buttons to take the user to external resources for the app.
  */
 
 const Buttons = (): JSX.Element => {

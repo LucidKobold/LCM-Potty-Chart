@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 
 /**
- * Reusable signout button for the auth component.
+ * @returns Reusable signout button for the auth component.
  * Invokes the Next-Auth signout function on click to
  * clear the session and remove it from the database.
  */

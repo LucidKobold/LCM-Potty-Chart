@@ -17,6 +17,12 @@ const UserProfile = (): JSX.Element => {
     }
   }, [router, session, status]);
 
+  /**
+   * This component is the first iteration of a setting component.
+   * It will allow users to view and edit their profile. The edit portion
+   * will be offloaded to a separate component in the settings component.
+   */
+
   return status === "loading" ? (
     <Box>
       <Title title="Loading" />

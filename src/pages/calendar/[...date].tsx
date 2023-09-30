@@ -27,6 +27,12 @@ const DateRoute: React.FC<unknown> = () => {
   // const dateRange = useRef(findValidDateRange());
   // const validDateRange = Object.assign({}, dateRange.current);
 
+  /**
+   * This component is to display a specific date on the calender component.
+   * @param dateArr the array of dates for the calendar component.
+   * @returns a specific date in the date calender.
+   */
+
   const validateDateInput = (
     dateArr: number[]
   ): UpdateCalenderPropsDateLayout => {

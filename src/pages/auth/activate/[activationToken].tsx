@@ -15,6 +15,11 @@ interface Errors {
   needRegenerate: boolean;
 }
 
+/**
+ * This component is for users to automatically activate their account
+ * when following the activation link sent to their email address.
+ */
+
 const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
   const { activationToken } = router.query;

@@ -72,8 +72,6 @@ const Calender = ({
     layout[`${userSettings.startOfWeek.toLowerCase()}`];
   const { month, weekdays } = currMonth;
 
-  // TODO: Move the weekdays into it's own component for responsiveness.
-
   return (
     <VStack h="92vh" w="100%" mb="5vh">
       <CalenderNav title={title} isLoading={isLoading} />
@@ -157,7 +155,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                        `/${sticker === null ? 0 : sticker}`
+                      `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );

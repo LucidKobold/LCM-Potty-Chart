@@ -17,6 +17,11 @@ const VerifyPage = (): JSX.Element => {
     }
   }, [router, session, status]);
 
+  /**
+   * This is used to display a message to the user in the event their
+   * account is not activated.
+   */
+
   return session ? (
     <Box>
       <Title title="Check Email" />

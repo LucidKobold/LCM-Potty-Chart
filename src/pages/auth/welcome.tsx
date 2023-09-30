@@ -52,6 +52,12 @@ const NewUserPage = (): JSX.Element => {
     }
   }, [router, session, status]);
 
+  /**
+   * This is used to walk the user through setting up their account.
+   * Including setting their profile picture, username, and general settings.
+   * At a later date they will be able to search for friends to follow or add within this component.
+   */
+
   return session && status !== "loading" ? (
     tokenStatus.status === null ? (
       <Box>
@@ -82,8 +88,8 @@ const NewUserPage = (): JSX.Element => {
           error
           toActivationPage={
             tokenStatus.message.split("Account not activated").length ||
-            tokenStatus.message.split("Your activation status is not valid")
-              .length > 1
+              tokenStatus.message.split("Your activation status is not valid")
+                .length > 1
               ? true
               : false
           }

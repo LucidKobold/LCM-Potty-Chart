@@ -18,6 +18,8 @@ interface ManualAccountActivationFormProps {
  * A form that will take in and validate an account activation token.
  * Provided to the users if automatic activation fails.
  * @param activate the activation function to be invoked on submit.
+ * @returns the form for users to manually activate their account
+ * using their activation token sent to their email.
  */
 
 const ManualAccountActivationForm = ({
@@ -141,13 +143,13 @@ const ManualAccountActivationForm = ({
                         isDisabled={form.isSubmitting}
                         {...(!form.errors.token && form.touched.token
                           ? {
+                            borderColor: "brand.valid",
+                            boxShadow: "0 0 0 1px #00c17c",
+                            _hover: {
                               borderColor: "brand.valid",
-                              boxShadow: "0 0 0 1px #00c17c",
-                              _hover: {
-                                borderColor: "brand.valid",
-                                boxShadow: "0 0 0 1px #00c17c"
-                              }
+                              boxShadow: "0 0 0 1px #00c17c"
                             }
+                          }
                           : "")}
                       />
                       <FormErrorMessage>

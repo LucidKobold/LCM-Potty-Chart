@@ -38,6 +38,7 @@ interface DatePickerProps {
  * Allows the user to manually select a month to navigate to within their chart.
  * @param {boolean} isLoading is the component loading?
  * @param {string} title the title for the current date.
+ * @returns the date picker element to change the date for the calender.
  */
 
 const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
@@ -237,13 +238,13 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
                               max={format(validDateRange.end, "yyyy-MM-dd")}
                               {...(!form.errors.date && form.touched.date
                                 ? {
+                                  borderColor: "brand.valid",
+                                  boxShadow: "0 0 0 1px #00c17c",
+                                  _hover: {
                                     borderColor: "brand.valid",
-                                    boxShadow: "0 0 0 1px #00c17c",
-                                    _hover: {
-                                      borderColor: "brand.valid",
-                                      boxShadow: "0 0 0 1px #00c17c"
-                                    }
+                                    boxShadow: "0 0 0 1px #00c17c"
                                   }
+                                }
                                 : "")}
                             />
                             {!form.touched.date && (

@@ -18,6 +18,7 @@ const MotionBox = motion<BoxProps>(Box);
  * @param {"primary" | "secondary" | "footer"} type the type of button
  * to be used or displayed.
  * @param {boolean} newTab should the link open in a new tab?
+ * @returns a reusable button component with the values provided.
  */
 
 const CustomButton = ({

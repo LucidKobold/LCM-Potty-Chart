@@ -17,6 +17,12 @@ interface Errors {
 
 // TODO: Check if the account is activated. Take them to the welcome page if it is. Add the resend activation token button. Align the buttons properly.
 
+/**
+ * This is a fallback activation component for user to manually input their activation token
+ * from their email address. This component will also allow users regenerate their activation token
+ * if it expired or became invalid.
+ */
+
 const ActivateAccount = (): JSX.Element => {
   const router = useRouter();
 

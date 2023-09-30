@@ -36,6 +36,7 @@ interface DisplayMessageProps {
  * @param {boolean} manActivation displays the manual account activation form.
  * @param activate the function to be called when the manual activation from is submitted.
  * @param {boolean} toActivationPage displays a button that takes the user to the activation page.
+ * @returns a reusable message box with other components to display errors with the login and welcome component.
  */
 
 const DisplayMessage = ({

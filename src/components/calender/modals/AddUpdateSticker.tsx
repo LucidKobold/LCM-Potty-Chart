@@ -44,6 +44,7 @@ interface AddStickerProps {
  * @param {StickerVal} selectedSticker the value of the selected sticker.
  * @param {React.Dispatch<React.SetStateAction<StickerVal>>} updateSelectedSticker The react state function to update the selected sticker that will be added or updated.
  * @param {Date} currDate the current date.
+ * @returns reusable modal to update or add a sticker for a given date.
  */
 
 const AddUpdateSticker = ({
