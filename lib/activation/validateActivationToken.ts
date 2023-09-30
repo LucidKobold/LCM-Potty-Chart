@@ -13,6 +13,13 @@ interface ValidateTokenProps extends Token {
   sessionUserId: string;
 }
 
+/**
+ * This function is to check if the activation token of a user is valid or already activated.
+ * It is used to validate if a token is ready to be validated or not.
+ * @param {ValidateTokenProps} tokenInfo the activation token for the user.
+ * @returns the validation status and any error messages.
+ */
+
 const validateToken = ({
   validated,
   userId,

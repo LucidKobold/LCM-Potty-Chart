@@ -3,6 +3,7 @@
  * @param {string }version The version string.
  * @returns {number} a number that represents the most recent major release.
  */
+
 const versionStringToNumber = (version: string): number => {
   const versionStrArr: string[] = version.split(".");
 

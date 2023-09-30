@@ -37,6 +37,7 @@ const weekDays: WeekDays = {
  * @param {Date} currDate The date to be compared to the selected month.
  * @returns True if currDate is outside of the month of selectedDate, false if otherwise.
  */
+
 const isOverflow = (
   selectedDate: Date,
   currDate: Date
