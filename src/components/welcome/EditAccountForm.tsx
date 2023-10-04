@@ -301,7 +301,6 @@ EditAccountProps): JSX.Element => {
                       alignItems="flex-start"
                     >
                       <Textarea
-                        required
                         {...fieldTheme}
                         {...field}
                         isDisabled={form.isSubmitting}
