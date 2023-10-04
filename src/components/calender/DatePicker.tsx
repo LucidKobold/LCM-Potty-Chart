@@ -238,13 +238,13 @@ const DatePicker = ({ title, isLoading }: DatePickerProps): JSX.Element => {
                               max={format(validDateRange.end, "yyyy-MM-dd")}
                               {...(!form.errors.date && form.touched.date
                                 ? {
-                                  borderColor: "brand.valid",
-                                  boxShadow: "0 0 0 1px #00c17c",
-                                  _hover: {
                                     borderColor: "brand.valid",
-                                    boxShadow: "0 0 0 1px #00c17c"
+                                    boxShadow: "0 0 0 1px #00c17c",
+                                    _hover: {
+                                      borderColor: "brand.valid",
+                                      boxShadow: "0 0 0 1px #00c17c"
+                                    }
                                   }
-                                }
                                 : "")}
                             />
                             {!form.touched.date && (

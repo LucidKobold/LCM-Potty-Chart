@@ -155,7 +155,7 @@ const Calender = ({
                     id.length
                       ? id
                       : format(toDateObj, "yyyyddLL") +
-                      `/${sticker === null ? 0 : sticker}`
+                        `/${sticker === null ? 0 : sticker}`
                   }
                 />
               );
