@@ -26,17 +26,17 @@ const sendActivationCodeEmail = (
   const message = {
     from: `"Lucid Creations Media no-reply" <${process.env.EMAIL_FROM}>`,
     to: `${userEmail}`,
-    subject: `Hello ${name}, please activate your account for LCM Potty Chart with the lint provided.`,
+    subject: `Hello ${name}, please activate your account for LCM Potty Chart with the link provided.`,
     html: `
     <div>
-      <p>You are receiving this email because your email was used to register an account within the app.</p>
-      <p>If you did not try to register an account please disregard this email and your account will be deleted within a few days.</p>
+      <p>You are receiving this email because your email was used to register an account within our app.</p>
+      <p>If you did not register an account please disregard this email and your account will be deleted within a few days.</p>
       <div>
-      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate/${activationCode}">Activate your account</a>.</p>
+      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate/${activationCode}">Click here to activate your account</a>.</p>
       <p></p>
-      <p>If you are have access with the link above try to manually activate your account with the following link:</P
-      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate">Manual activation (https://${process.env.NEXTAUTH_URL}/auth/activate)</a></p>
-      <p>Activation code:</p>
+      <p>If the activation link does not work try to manually enter your activation code using this link:</P
+      <p><a href="${process.env.NEXTAUTH_URL}/auth/activate">Manual activation page</a> (${process.env.NEXTAUTH_URL}/auth/activate)</p>
+      <p>Your activation code:</p>
       <p><strong>${activationCode}</strong></p>
       </div>
     </div>
