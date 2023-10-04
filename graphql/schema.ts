@@ -104,7 +104,6 @@ const typeDefs = gql`
       name: String!
       username: String!
       bio: String!
-      image: String!
     ): User!
   }
 `;
