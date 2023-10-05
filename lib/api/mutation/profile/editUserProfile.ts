@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import apolloClient from "../../apollo";
+import apolloClient from "../../../apollo";
 
 interface EditUserProfileProps {
   userId: string;

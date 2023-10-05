@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, Field, FieldProps } from "formik";
 import React, { useEffect, useState } from "react";
-import editUserProfile from "../../../lib/api/mutation/editUserProfile";
+import editUserProfile from "../../../lib/api/mutation/profile/editUserProfile";
 
 interface EditAccountProps {
   userId: string;

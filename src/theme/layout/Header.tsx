@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import CustomButton from "../../components/buttons/Custom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { User } from "next-auth";
+import { populateProfile } from "../../features/profile";
 import {
   Heading,
   HStack,
@@ -25,7 +29,6 @@ import MobileNav from "./MobileNav";
 import appLogo from "../../../public/images/logo.svg";
 import Image from "next/image";
 import SignOutButton from "../../components/auth/buttons/SingnOutButton";
-import CustomButton from "../../components/buttons/Custom";
 
 const Header = (): JSX.Element => {
   const router = useRouter();
@@ -56,6 +59,16 @@ const Header = (): JSX.Element => {
 
   // User session and profile
   const { data: session, status } = useSession();
+
+  const dispatch = useAppDispatch();
+
+  const reduxProfile: User = useAppSelector((state) => state.profile);
+
+  useEffect(() => {
+    if (status === "authenticated" && reduxProfile.id === "") {
+      dispatch(populateProfile(session.user));
+    }
+  }, [dispatch, reduxProfile.id, session, status]);
 
   return (
     <Box
