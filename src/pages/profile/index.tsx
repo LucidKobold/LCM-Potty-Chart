@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useAppSelector } from "../../redux/hooks";
 import { useRouter } from "next/router";
 import { Box, VStack } from "@chakra-ui/react";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import DisplayMessage from "../../components/auth/DisplayMessage";
 import Title from "../../components/title";
+import { User } from "next-auth";
 
 const UserProfile = (): JSX.Element => {
   const router = useRouter();
@@ -16,6 +18,8 @@ const UserProfile = (): JSX.Element => {
       router.push("/auth/signin");
     }
   }, [router, session, status]);
+
+  const reduxProfile: User = useAppSelector((state) => state.profile);
 
   /**
    * This component is the first iteration of a setting component.
@@ -39,9 +43,9 @@ const UserProfile = (): JSX.Element => {
     >
       <Title title="User Profile" />
       <ProfileHeader
-        name={session.user.name}
-        username={session.user.username}
-        bio={session.user.bio}
+        name={reduxProfile.name}
+        username={reduxProfile.username}
+        bio={reduxProfile.bio}
         loading={false}
       />
     </VStack>

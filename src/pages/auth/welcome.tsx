@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { useAppSelector } from "../../redux/hooks";
 import { Box } from "@chakra-ui/react";
 import ModifyAccount from "../../components/profile/ModifyAccount";
 import fetchActivationStatus from "../../../lib/api/query/fetchActivationStatus";
 import validateToken from "../../../lib/activation/validateActivationToken";
 import DisplayMessage from "../../components/auth/DisplayMessage";
 import Title from "../../components/title";
+import { User } from "next-auth";
 
 // TODO: On this page users will see the tutorial, have a chance to edit their info, customize their privacy settings, and add their friends.
 
@@ -23,8 +25,10 @@ const NewUserPage = (): JSX.Element => {
     message: ""
   });
 
+  const reduxProfile: User = useAppSelector((state) => state.profile);
+
   useEffect(() => {
-    if (session) {
+    if (session && status === "authenticated") {
       if (session.user) {
         const { id } = session.user;
         fetchActivationStatus
@@ -74,10 +78,10 @@ const NewUserPage = (): JSX.Element => {
       <Box>
         <Title title="Modify Your Account" />
         <ModifyAccount
-          userId={session.user.id}
-          name={session.user.name}
-          username={session.user.username}
-          bio={session.user.bio}
+          userId={reduxProfile.id}
+          name={reduxProfile.name}
+          username={reduxProfile.username}
+          bio={reduxProfile.bio}
         />
       </Box>
     ) : (

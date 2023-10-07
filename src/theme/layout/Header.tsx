@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import CustomButton from "../../components/buttons/Custom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { User } from "next-auth";
-import { populateProfile } from "../../features/profile";
+import { populateProfile, removeProfile } from "../../features/profile";
 import {
   Heading,
   HStack,
@@ -65,8 +65,19 @@ const Header = (): JSX.Element => {
   const reduxProfile: User = useAppSelector((state) => state.profile);
 
   useEffect(() => {
+    // console.log("Session status: ", status, session);
     if (status === "authenticated" && reduxProfile.id === "") {
       dispatch(populateProfile(session.user));
+    }
+
+    // TODO: Incorporate a status check when a status is added to the profile slice.
+    // * Use the status state to more reliably handle when to call the removeProfile reducer.
+    if (
+      status === "unauthenticated" &&
+      (!session || session === null) &&
+      reduxProfile.id.length > 0
+    ) {
+      dispatch(removeProfile());
     }
   }, [dispatch, reduxProfile.id, session, status]);
 

@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { useAppDispatch } from "../../redux/hooks";
+import { updateProfile } from "../../features/profile";
 import {
   VStack,
   FormControl,
@@ -10,7 +13,6 @@ import {
   Heading
 } from "@chakra-ui/react";
 import { Formik, Form, Field, FieldProps } from "formik";
-import React, { useEffect, useState } from "react";
 import editUserProfile from "../../../lib/api/mutation/profile/editUserProfile";
 
 interface EditAccountProps {
@@ -28,6 +30,7 @@ interface EditAccountProps {
  * @param {string} username the username id from the session.
  * @param {string} bio the user's bio from the session.
  * @param {boolean} loading is tha data being fetched from the session?
+ * @param {Role} role the role of the user.
  */
 
 const EditAccountForm = ({
@@ -37,6 +40,8 @@ const EditAccountForm = ({
   bio
 }: // loading
 EditAccountProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   // Form field valid statuses.
   const [validName, setValidName] = useState<boolean>(false);
   const [validUsername, setValidUsername] = useState<boolean>(false);
@@ -145,9 +150,33 @@ EditAccountProps): JSX.Element => {
       }}
       onSubmit={(values, actions) => {
         submitChanges({ ...values })
-          .then(() => {
-            actions.setSubmitting(false);
-            actions.resetForm();
+          .then(({ ...values }) => {
+            const { id, name, username, bio, role } =
+              values.data.updateAccountInfo;
+
+            if (
+              typeof id === "string" &&
+              typeof name === "string" &&
+              typeof username === "string" &&
+              typeof bio === "string" &&
+              typeof role === "string" &&
+              (role === "USER" || role === "ADMIN")
+            ) {
+              dispatch(updateProfile({ id, name, username, bio, role }));
+
+              actions.setSubmitting(false);
+
+              const newFormData = {
+                userId: id,
+                name,
+                username,
+                bio
+              };
+
+              actions.resetForm({
+                values: newFormData
+              });
+            }
           })
           .catch((err) => {
             actions.setSubmitting(false);
