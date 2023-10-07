@@ -29,11 +29,11 @@ const ActivateAccount = (): JSX.Element => {
   const [errors, setErrors] = useState<Errors>({} as Errors);
 
   useEffect(() => {
-    // Add the slice functions here.
     if (!session && status !== "loading") {
       router.push("/auth/signin");
     }
 
+    // TODO: Replace this with redux slices.
     if (activationToken && !Array.isArray(activationToken) && session) {
       fetchActivationStatus
         .withToken(activationToken)

@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "next-auth";
 
+// TODO: Add a loading state in the profile or account slice.
+// * Use the state to prevent unnecessary changes to the slice and the force updates when needed.
+
 const initialState: User = {
   id: "",
   name: "",
@@ -18,8 +21,6 @@ const profileSlice = createSlice({
     // Populate profile on login
     populateProfile(state: User, action: PayloadAction<User>) {
       const { id, name, email, image, role, username, bio } = action.payload;
-
-      console.info("Populate profile redux payload:", action.payload);
 
       state.id = id;
       state.name = name;
