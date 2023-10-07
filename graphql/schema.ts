@@ -89,6 +89,7 @@ const typeDefs = gql`
     users: [User]
     getVerificationWithToken(activationToken: String!): ActivationToken
     getVerificationWithUserId(userId: String!): ActivationToken
+    checkUsernameAvailable(username: String!): User
   }
 
   type Mutation {

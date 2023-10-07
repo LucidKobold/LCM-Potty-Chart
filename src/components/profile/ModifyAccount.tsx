@@ -34,7 +34,12 @@ const ModifyAccount = ({
       alignContent="center"
       spacing={4}
     >
-      <ProfileHeader name={name} username={username} bio={bio} loading={false} />
+      <ProfileHeader
+        name={name}
+        username={username}
+        bio={bio}
+        loading={false}
+      />
       <EditAccountForm
         userId={userId}
         name={name}

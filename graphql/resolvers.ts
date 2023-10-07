@@ -11,7 +11,9 @@ const publicResolvers = {
     getVerificationWithUserId: async (_parent, { userId }, ctx) =>
       await ctx.prisma.activationToken.findUnique({
         where: { userId: userId }
-      })
+      }),
+    checkUsernameAvailable: async (_parent, { username }, ctx) =>
+      await ctx.prisma.user.findUnique({ where: { username: username } })
   },
   Mutation: {
     genVerificationToken: async (_parent, { userId, expires }, ctx) => {
