@@ -1,5 +1,5 @@
-import sendActivationCodeEmail from "../lib/activation/email/sendActivationCodeEmail";
-import sendWelcomeEmail from "../lib/activation/email/sendWelcomeEmail";
+import sendActivationCodeEmail from "../lib/account/activation/email/sendActivationCodeEmail";
+import sendWelcomeEmail from "../lib/account/activation/email/sendWelcomeEmail";
 
 const publicResolvers = {
   Query: {

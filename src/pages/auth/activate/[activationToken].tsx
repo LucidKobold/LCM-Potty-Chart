@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Box } from "@chakra-ui/react";
 import Title from "../../../components/title";
-import fetchActivationStatus from "../../../../lib/api/query/fetchActivationStatus";
-import tokenReadyToActivate from "../../../../lib/activation/tokenReadyToActivate";
+import fetchActivationStatus from "../../../../lib/api/query/activation/fetchActivationStatus";
 import activateAccount from "../../../../lib/api/mutation/activation/activateAccount";
 import DisplayMessage from "../../../components/auth/DisplayMessage";
+import tokenReadyToActivate from "../../../../lib/account/activation/tokenReadyToActivate";
 
 interface Errors {
   error: boolean;

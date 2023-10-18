@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { HStack, IconButton } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { format, isSameMonth, addMonths, subMonths } from "date-fns";
-import findValidDateRange from "../../../lib/findValidDateRange";
+import findValidDateRange from "../../../lib/calender/findValidDateRange";
 import DatePicker from "./DatePicker";
 
 interface CalenderNavProps {

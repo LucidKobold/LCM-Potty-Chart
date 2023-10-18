@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { format } from "date-fns";
-import populate from "../../../lib/populateMonth";
+import populate from "../../../lib/calender/populateMonth";
 
 interface CalenderSlice {
   currDate: string;

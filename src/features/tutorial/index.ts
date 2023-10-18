@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addMonths, endOfDay } from "date-fns";
-import versionStringToNumber from "../../../lib/versionStringToNumber";
+import versionStringToNumber from "../../../lib/misc/versionStringToNumber";
 
 export interface StorageState {
   exp: string;

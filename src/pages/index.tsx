@@ -13,7 +13,7 @@ import { format, isAfter, isBefore, startOfDay } from "date-fns";
 import Calender from "../components/calender";
 import Tutorial from "../components/tutorial";
 import LoadingOverlay from "../components/loading/LoadingOverlay";
-import versionStringToNumber from "../../lib/versionStringToNumber";
+import versionStringToNumber from "../../lib/misc/versionStringToNumber";
 
 const IndexPage = (): JSX.Element => {
   const currDateStr: string = useAppSelector(

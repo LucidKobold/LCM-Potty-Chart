@@ -26,7 +26,7 @@ import {
   FieldProps
 } from "formik";
 import { format } from "date-fns";
-import findValidDateRange from "../../../lib/findValidDateRange";
+import findValidDateRange from "../../../lib/calender/findValidDateRange";
 import FormValidateEmoji from "./FormValidateEmoji";
 
 interface DatePickerProps {

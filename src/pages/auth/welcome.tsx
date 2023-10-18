@@ -4,11 +4,11 @@ import { useSession } from "next-auth/react";
 import { useAppSelector } from "../../redux/hooks";
 import { Box } from "@chakra-ui/react";
 import ModifyAccount from "../../components/profile/ModifyAccount";
-import fetchActivationStatus from "../../../lib/api/query/fetchActivationStatus";
-import validateToken from "../../../lib/activation/validateActivationToken";
 import DisplayMessage from "../../components/auth/DisplayMessage";
 import Title from "../../components/title";
 import { User } from "next-auth";
+import fetchActivationStatus from "../../../lib/api/query/activation/fetchActivationStatus";
+import validateToken from "../../../lib/account/activation/validateActivationToken";
 
 // TODO: On this page users will see the tutorial, have a chance to edit their info, customize their privacy settings, and add their friends.
 

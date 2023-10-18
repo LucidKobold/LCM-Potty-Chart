@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import apolloClient from "../../apollo";
+import apolloClient from "../../../apollo";
 
 const FETCH_CHECKAVAILIBLEUSERNAME = gql`
-  query GetVerificationWithUserId($username: String!) {
-    getVerificationWithUserId(username: $username) {
+  query checkUsernameAvailable($username: String!) {
+    checkUsernameAvailable(username: $username) {
       username
     }
   }
