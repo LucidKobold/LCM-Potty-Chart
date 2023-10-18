@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateProfile } from "../../features/profile";
@@ -10,10 +11,18 @@ import {
   FormErrorMessage,
   Button,
   Textarea,
-  Heading
+  Heading,
+  InputGroup,
+  InputRightElement,
+  Text,
+  Tooltip,
+  InputLeftAddon
 } from "@chakra-ui/react";
 import { Formik, Form, Field, FieldProps } from "formik";
 import editUserProfile from "../../../lib/api/mutation/profile/editUserProfile";
+import checkUsernameAvailible from "../../../lib/profile/checkUsernameAvailible";
+import { generateUsername } from "../../../lib/profile/generateProfile";
+import { Icon } from "@iconify/react";
 
 interface EditAccountProps {
   userId: string;
@@ -39,13 +48,16 @@ const EditAccountForm = ({
   username,
   bio
 }: // loading
-EditAccountProps): JSX.Element => {
+  EditAccountProps): JSX.Element => {
+  // TODO: Make hstacks for mobile responsiveness.
   const dispatch = useAppDispatch();
 
   // Form field valid statuses.
   const [validName, setValidName] = useState<boolean>(false);
   const [validUsername, setValidUsername] = useState<boolean>(false);
   const [validBio, setValidBio] = useState<boolean>(false);
+  const [usernameSuggestions, setUsernameSuggestions] = useState<string[]>([]);
+  const [checkingUsername, setCheckingUsername] = useState<boolean>(false);
 
   const validateName = (newName: string): string | undefined => {
     let errorMessage;
@@ -65,8 +77,38 @@ EditAccountProps): JSX.Element => {
     return errorMessage;
   };
 
-  const validateUsername = (newUsername: string): string | undefined => {
-    let errorMessage;
+  const generateSuggestedUsernames = async (
+    username: string
+  ): Promise<string[]> => {
+    const suggestions: string[] = [];
+    setCheckingUsername(true);
+
+    // Reset the suggested username array if it exists.
+    if (usernameSuggestions.length) {
+      setUsernameSuggestions([]);
+    }
+
+    for (let i = suggestions.length; i < 4; i++) {
+      await generateUsername(username).then((newUsername) => {
+        suggestions[suggestions.length] = newUsername;
+      });
+    }
+
+    if (suggestions.length === 4) {
+      setCheckingUsername(false);
+      return suggestions;
+    }
+  };
+
+  const validateUsername = async (
+    newUsername: string
+  ): Promise<string | undefined> => {
+    let errorMessage: string;
+
+    // Reset the suggested username array if it exists.
+    if (usernameSuggestions.length) {
+      setUsernameSuggestions([]);
+    }
 
     if (!newUsername) {
       errorMessage = "Please enter a username.";
@@ -74,13 +116,28 @@ EditAccountProps): JSX.Element => {
     } else if (newUsername === "") {
       errorMessage = "Please enter a username.";
       setValidUsername(false);
-    } else if (newUsername.length < 5 || newUsername.length > 25) {
-      errorMessage = "Username must be between 5 and 25 characters.";
+    } else if (newUsername.length < 3 || newUsername.length > 25) {
+      errorMessage = "Username must be between 3 and 25 characters.";
       setValidUsername(false);
     } else {
-      setValidUsername(true);
+      if (newUsername !== username) {
+        setCheckingUsername(true);
+        if (await checkUsernameAvailible(newUsername)) {
+          setValidUsername(true);
+        } else {
+          errorMessage =
+            "This username already exits. Please try another username or pick from one of the suggestions.";
+          setValidUsername(false);
+          generateSuggestedUsernames(newUsername).then((usernames) => {
+            setUsernameSuggestions(usernames);
+          });
+        }
+      } else {
+        setValidUsername(true);
+      }
     }
 
+    setCheckingUsername(false);
     return errorMessage;
   };
 
@@ -102,14 +159,14 @@ EditAccountProps): JSX.Element => {
 
   // Validate the fields on change.
   useEffect(() => {
-    if (!validName || !validUsername || !validBio) {
+    if (!validName || !validUsername || !validBio || checkingUsername) {
       setValidForm(false);
     }
 
-    if (validName && validUsername && validBio) {
+    if (validName && validUsername && validBio && !checkingUsername) {
       setValidForm(true);
     }
-  }, [validBio, validName, validUsername]);
+  }, [checkingUsername, validBio, validName, validUsername]);
 
   // Field theme
   const fieldTheme = {
@@ -139,6 +196,7 @@ EditAccountProps): JSX.Element => {
 
   // ! Add a "preview changes" button that doesn't submit the changes.
   // ! Add a "reset preview" button that changes the profile header back to values form the session.
+  // ! Add a clear changes button that clears the changes the user has made.
 
   return (
     <Formik
@@ -211,29 +269,30 @@ EditAccountProps): JSX.Element => {
                     w="100%"
                     spacing={0}
                     justifyContent="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                   >
-                    <FormLabel fontSize="xl" w="6rem" htmlFor="name">
+                    <FormLabel fontSize="xl" w="6.5rem" htmlFor="name">
                       {"Name"}
                     </FormLabel>
                     <VStack
                       h="auto"
                       w="100%"
-                      spacing={4}
+                      spacing={2}
                       justifyContent="center"
                       alignItems="flex-start"
                     >
-                      <Input
-                        required
-                        {...fieldTheme}
-                        {...field}
-                        type="name"
-                        id="name"
-                        name="name"
-                        placeholder="John Doe."
-                        isDisabled={form.isSubmitting}
-                        {...(!form.errors.name && form.touched.name
-                          ? {
+                      <InputGroup>
+                        <Input
+                          required
+                          {...fieldTheme}
+                          {...field}
+                          type="name"
+                          id="name"
+                          name="name"
+                          placeholder="John Doe"
+                          isDisabled={form.isSubmitting}
+                          {...(!form.errors.name && form.touched.name
+                            ? {
                               borderColor: "brand.valid",
                               boxShadow: "0 0 0 1px #00c17c",
                               _hover: {
@@ -241,8 +300,25 @@ EditAccountProps): JSX.Element => {
                                 boxShadow: "0 0 0 1px #00c17c"
                               }
                             }
-                          : "")}
-                      />
+                            : "")}
+                        />
+                        <InputRightElement>
+                          <Tooltip label="Name valid">
+                            {!form.errors.name && form.touched.name ? (
+                              <Text>
+                                <Icon icon="mdi:check-bold" color="green" />
+                              </Text>
+                            ) : (
+                              <Text>
+                                <Icon
+                                  icon="mdi:alpha-x-box-outline"
+                                  color="red"
+                                />
+                              </Text>
+                            )}
+                          </Tooltip>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>
                         {typeof form.errors.name === "string"
                           ? form.errors.name
@@ -265,29 +341,31 @@ EditAccountProps): JSX.Element => {
                     w="100%"
                     spacing={0}
                     justifyContent="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                   >
-                    <FormLabel fontSize="xl" w="6rem" htmlFor="username">
+                    <FormLabel fontSize="xl" w="6.5rem" htmlFor="username">
                       {"Username"}
                     </FormLabel>
                     <VStack
                       h="auto"
                       w="100%"
-                      spacing={4}
+                      spacing={2}
                       justifyContent="center"
                       alignItems="flex-start"
                     >
-                      <Input
-                        required
-                        {...fieldTheme}
-                        {...field}
-                        type="username"
-                        id="username"
-                        name="username"
-                        placeholder="username"
-                        isDisabled={form.isSubmitting}
-                        {...(!form.errors.username && form.touched.username
-                          ? {
+                      <InputGroup>
+                        <InputLeftAddon children="@" />
+                        <Input
+                          required
+                          {...fieldTheme}
+                          {...field}
+                          type="username"
+                          id="username"
+                          name="username"
+                          placeholder="JaneDoe"
+                          isDisabled={form.isSubmitting}
+                          {...(validUsername
+                            ? {
                               borderColor: "brand.valid",
                               boxShadow: "0 0 0 1px #00c17c",
                               _hover: {
@@ -295,13 +373,70 @@ EditAccountProps): JSX.Element => {
                                 boxShadow: "0 0 0 1px #00c17c"
                               }
                             }
-                          : "")}
-                      />
+                            : "")}
+                        />
+                        <InputRightElement>
+                          <Tooltip label="Check if this username is valid">
+                            <Button
+                              isLoading={checkingUsername}
+                              type="submit"
+                              variant="submit"
+                              onClick={() => {
+                                if (field.value !== username) {
+                                  validateUsername(field.value);
+                                }
+                                form.setTouched({
+                                  ...form.touched,
+                                  [field.name]: true
+                                });
+                              }}
+                            >
+                              {validUsername ? (
+                                <Text>
+                                  <Icon icon="mdi:check-bold" color="green" />
+                                </Text>
+                              ) : (
+                                <Text>
+                                  <Icon
+                                    icon="mdi:alpha-x-box-outline"
+                                    color="red"
+                                  />
+                                </Text>
+                              )}
+                            </Button>
+                          </Tooltip>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>
                         {typeof form.errors.username === "string"
                           ? form.errors.username
                           : ""}
                       </FormErrorMessage>
+                      {usernameSuggestions && (
+                        <HStack
+                          w="100%"
+                          h="auto"
+                          alignContent="center"
+                          justifyContent="center"
+                        >
+                          {usernameSuggestions.map((suggestedUsername) => (
+                            <Button
+                              type="button"
+                              variant="unthemed"
+                              key={suggestedUsername}
+                              onClick={() => {
+                                form.setFieldValue(
+                                  "username",
+                                  suggestedUsername
+                                );
+                                setValidUsername(true);
+                              }}
+                            >
+                              {suggestedUsername}
+                            </Button>
+                          ))}
+                        </HStack>
+                      )}
                     </VStack>
                   </HStack>
                 </FormControl>
@@ -319,7 +454,7 @@ EditAccountProps): JSX.Element => {
                     justifyContent="center"
                     alignItems="flex-start"
                   >
-                    <FormLabel fontSize="xl" w="6rem" htmlFor="bio">
+                    <FormLabel fontSize="xl" w="6.5rem" htmlFor="bio">
                       {"Bio"}
                     </FormLabel>
                     <VStack
@@ -338,13 +473,13 @@ EditAccountProps): JSX.Element => {
                         placeholder="I am a furry looking to track my weekly chores and reward myself with pretty stickers and praise from friends."
                         {...(!form.errors.bio && form.touched.bio
                           ? {
+                            borderColor: "brand.valid",
+                            boxShadow: "0 0 0 1px #00c17c",
+                            _hover: {
                               borderColor: "brand.valid",
-                              boxShadow: "0 0 0 1px #00c17c",
-                              _hover: {
-                                borderColor: "brand.valid",
-                                boxShadow: "0 0 0 1px #00c17c"
-                              }
+                              boxShadow: "0 0 0 1px #00c17c"
                             }
+                          }
                           : "")}
                       />
                       <FormErrorMessage>

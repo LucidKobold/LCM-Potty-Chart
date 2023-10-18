@@ -41,3 +41,4 @@ const editUserProfile = (newUserInfo: EditUserProfileProps) => {
 };
 
 export default editUserProfile;
+export type { EditUserProfileProps };

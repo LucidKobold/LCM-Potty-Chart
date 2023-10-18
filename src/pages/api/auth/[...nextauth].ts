@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "../../../../lib/prisma";
 import EmailProvider from "next-auth/providers/email";
 import genActivationToken from "../../../../lib/api/mutation/activation/genActivationToken";
-import editUserProfile from "../../../../lib/api/mutation/profile/editUserProfile";
+import generateProfile from "../../../../lib/profile/generateProfile";
 
 // TODO: On signin check if the account is activated using one of the Redux helper functions.
 // * If not take the user to the activation page.
@@ -82,10 +82,10 @@ export const authOptions: NextAuthOptions = {
       // * Generate activation token.
       genActivationToken(id);
 
-      // * Generate and set the username.
+      // * Generate username from email.
       const username = email.split("@")[0];
 
-      editUserProfile({ userId: id, name, username, bio: "" });
+      generateProfile({ userId: id, name, username, bio: "" });
     }
     // async updateUser(message) { /* user updated - e.g. their email was verified */ },
     // async linkAccount(message) { /* account (e.g. Twitter) linked to a user */ },

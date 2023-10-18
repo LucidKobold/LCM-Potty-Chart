@@ -35,6 +35,19 @@ const buttonStyles = {
         )(props)
       }
     }),
+    unthemed: (props: Dict<never>) => ({
+      bg: "gray.600",
+      fontSize: "xl",
+      py: 3,
+      px: 4,
+      color: "whiteAlpha",
+      _hover: {
+        bg: mode(
+          whiten("brand.primary", 20),
+          darken("brand.primary", 20)
+        )(props)
+      }
+    }),
     skip: (props: Dict<never>) => ({
       bg: "transparent",
       fontSize: "xl",
