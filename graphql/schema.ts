@@ -63,7 +63,7 @@ const typeDefs = gql`
     ActivationToken: ActivationToken!
     accounts: [Account]!
     sessions: [Session]!
-    Calender: [Calender]
+    # Calender: [Calender]
   }
 
   type VerificationToken {
@@ -86,16 +86,16 @@ const typeDefs = gql`
     User: User!
   }
 
-  type Calender {
-    id: String!
-    userId: String!
-    name: String!
-    type: String!
-    theme: String!
-    calendarData: JSON!
-    createdAt: Date!
-    updatedAt: Date!
-  }
+  # type Calender {
+  #   id: String!
+  #   userId: String!
+  #   name: String!
+  #   type: String!
+  #   theme: String!
+  #   calendarData: JSON!
+  #   createdAt: Date!
+  #   updatedAt: Date!
+  # }
 
   type Query {
     users: [User]

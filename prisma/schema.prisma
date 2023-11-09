@@ -70,7 +70,7 @@ model User {
   accounts        Account[]
   sessions        Session[]
   ActivationToken ActivationToken?
-  Calendar        Calendar[]
+  // Calendar        Calendar[]
 }
 
 model VerificationToken {
@@ -95,14 +95,14 @@ model ActivationToken {
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Calendar {
-  id           String   @id @default(cuid())
-  userId       String
-  name         String
-  type         String
-  theme        String
-  calendarData Json    @db.Json
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+// model Calendar {
+//   id           String   @id @default(cuid())
+//   userId       String
+//   name         String
+//   type         String
+//   theme        String
+//   calendarData Json    @db.Json
+//   createdAt    DateTime @default(now())
+//   updatedAt    DateTime @updatedAt
+//   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }

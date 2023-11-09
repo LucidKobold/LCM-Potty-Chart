@@ -75,8 +75,19 @@ const publicResolvers = {
       _parent,
       { userId, name, username, bio, image },
       ctx
-    ) =>
-      await ctx.prisma.user.update({
+    ) => {
+      let msg = "An error may have occurred for this query (checkSession)";
+      const session = await ctx.session;
+
+      if (await session) {
+        msg = `The user logged has the role of ${session.user.role}`;
+        console.log(msg);
+      } else {
+        msg = `There is no active session`;
+        console.log(msg);
+      }
+
+      return await ctx.prisma.user.update({
         where: {
           id: userId
         },
@@ -86,7 +97,8 @@ const publicResolvers = {
           bio,
           image
         }
-      })
+      });
+    }
   },
   User: {
     accounts: async (parent, _args, ctx) =>
