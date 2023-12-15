@@ -17,7 +17,6 @@ const UserProfile = (): JSX.Element => {
     if (!session && status !== "loading") {
       router.push("/auth/signin");
     }
-
   }, [router, session, status]);
 
   const reduxProfile: User = useAppSelector((state) => state.profile);

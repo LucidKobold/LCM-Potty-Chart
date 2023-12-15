@@ -139,10 +139,10 @@ const Day = ({
           ? tutorial === "add" && isToday
             ? "gray.600"
             : tutorial === "edit" &&
-              !isToday &&
-              isBefore(currDateObj, endOfDay(currDate))
-            ? "gray.600"
-            : "transparent"
+                !isToday &&
+                isBefore(currDateObj, endOfDay(currDate))
+              ? "gray.600"
+              : "transparent"
           : "transparent"
       }
       border={
@@ -150,10 +150,10 @@ const Day = ({
           ? tutorial === "add" && isToday
             ? "1px solid #00ff3c"
             : tutorial === "edit" &&
-              !isToday &&
-              isBefore(currDateObj, endOfDay(currDate))
-            ? "1px solid #00ff3c"
-            : "1px solid #0068ff"
+                !isToday &&
+                isBefore(currDateObj, endOfDay(currDate))
+              ? "1px solid #00ff3c"
+              : "1px solid #0068ff"
           : "1px solid #0068ff"
       }
       onClick={() => {
@@ -169,18 +169,18 @@ const Day = ({
           tutorial === "add" && isTodayFun(currDateObj)
             ? "pointer"
             : tutorial === "edit" && isBefore(currDateObj, startOfDay(currDate))
-            ? "pointer"
-            : !tutorial && isBefore(currDateObj, endOfDay(currDate))
-            ? "pointer"
-            : "default",
+              ? "pointer"
+              : !tutorial && isBefore(currDateObj, endOfDay(currDate))
+                ? "pointer"
+                : "default",
         bg: tutorial
           ? tutorial === "add" && isToday
             ? "gray.600"
             : tutorial === "edit" &&
-              !isToday &&
-              isBefore(currDateObj, endOfDay(currDate))
-            ? "gray.600"
-            : "transparent"
+                !isToday &&
+                isBefore(currDateObj, endOfDay(currDate))
+              ? "gray.600"
+              : "transparent"
           : "transparent",
         border: "1px solid #FFF"
       }}
